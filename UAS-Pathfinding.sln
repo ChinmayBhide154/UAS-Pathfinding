@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UAS-Pathfinding", "UAS-Pathfinding\UAS-Pathfinding.vcxproj", "{D100EFC4-4BDD-417D-9FB4-D091ACA8F8E2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UAS-Pathfinding-Tests", "UAS-Pathfinding-Tests\UAS-Pathfinding-Tests.vcxproj", "{84028255-9592-440D-BB45-A773DA60CC72}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D100EFC4-4BDD-417D-9FB4-D091ACA8F8E2}.Debug|x64.ActiveCfg = Debug|x64
+		{D100EFC4-4BDD-417D-9FB4-D091ACA8F8E2}.Debug|x64.Build.0 = Debug|x64
+		{D100EFC4-4BDD-417D-9FB4-D091ACA8F8E2}.Debug|x86.ActiveCfg = Debug|Win32
+		{D100EFC4-4BDD-417D-9FB4-D091ACA8F8E2}.Debug|x86.Build.0 = Debug|Win32
+		{D100EFC4-4BDD-417D-9FB4-D091ACA8F8E2}.Release|x64.ActiveCfg = Release|x64
+		{D100EFC4-4BDD-417D-9FB4-D091ACA8F8E2}.Release|x64.Build.0 = Release|x64
+		{D100EFC4-4BDD-417D-9FB4-D091ACA8F8E2}.Release|x86.ActiveCfg = Release|Win32
+		{D100EFC4-4BDD-417D-9FB4-D091ACA8F8E2}.Release|x86.Build.0 = Release|Win32
+		{84028255-9592-440D-BB45-A773DA60CC72}.Debug|x64.ActiveCfg = Debug|x64
+		{84028255-9592-440D-BB45-A773DA60CC72}.Debug|x64.Build.0 = Debug|x64
+		{84028255-9592-440D-BB45-A773DA60CC72}.Debug|x86.ActiveCfg = Debug|Win32
+		{84028255-9592-440D-BB45-A773DA60CC72}.Debug|x86.Build.0 = Debug|Win32
+		{84028255-9592-440D-BB45-A773DA60CC72}.Release|x64.ActiveCfg = Release|x64
+		{84028255-9592-440D-BB45-A773DA60CC72}.Release|x64.Build.0 = Release|x64
+		{84028255-9592-440D-BB45-A773DA60CC72}.Release|x86.ActiveCfg = Release|Win32
+		{84028255-9592-440D-BB45-A773DA60CC72}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B11061A-DBE4-48E7-8B51-21F1E571B157}
+	EndGlobalSection
+EndGlobal
