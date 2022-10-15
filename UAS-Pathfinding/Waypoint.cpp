@@ -12,7 +12,7 @@ Waypoint::Waypoint(double xLat, double yLong, bool isGps, string name, double re
 		std::array<double, 2> GISGiven{ xLat, yLong };
 		std::array<double, 2> result{ wgs84::toCartesian(GISRef, GISGiven) };
 		x = result[0];
-		y = result[y];
+		y = result[1];
 	}
 	else {
 		x = xLat;
