@@ -16,7 +16,7 @@ class Waypoint
 
 	//Constructor
 
-	Waypoint(double xLat, double yLong, bool isGps, string name);
+	//Waypoint(double xLat, double yLong, bool isGps, string name);
 
 	//Functions
 
