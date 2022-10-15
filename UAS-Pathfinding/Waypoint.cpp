@@ -2,6 +2,9 @@
 #include "../submodules/WGS84toCartesian/WGS84toCartesian.hpp"
 #include <array>
 #include <cmath>
+
+
+Waypoint::Waypoint(){}
 Waypoint::Waypoint(double xLat, double yLong, bool isGps, string name, double refLat, double refLong) : name(name) {
 	if (isGps) {
 		lat = xLat;
