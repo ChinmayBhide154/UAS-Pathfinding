@@ -1,6 +1,7 @@
 #include "JSON.h"
 #include <fstream>
-#include <nlohmann/json.hpp>
+// #include <nlohmann/json.hpp>    // NOTE: Change to the line below
+#include "../submodules/json/single_include/nlohmann/json.hpp"
 using json = nlohmann::json;
 
 /*reads a json file and returns a Graph
@@ -19,12 +20,14 @@ namespace ns {
     }
 
 
-std::ifstream i("file.json");
-json j;
-i >> j;
+std::ifstream i("file.json");       // NOTE: Just rename the i to f and u can use parse(f) on line 26)
+json j; // NOTE: dont need this
+i >> j; // NOTE: dont need this
 json data = json::parse(f);
 
-ns:::"Graph" g: [
+// NOTE: It might be hard to directly parse to our data types on the first try
+
+ns::"Graph" g: [
     {
         "Route": "0" //where 0 is the name of route 0
             "waypoint" :[{
