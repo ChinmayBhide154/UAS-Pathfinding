@@ -10,11 +10,11 @@ public:
 	double rank;
 
 	// Constructors
-
+	Edge(Route route0, Route route1);
 
 	// Destructors
 
-
 	// Functions
+
 };
 

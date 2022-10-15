@@ -9,6 +9,9 @@ Route::Route(std::vector<Waypoint*> waypoints, std::string name, double dollarVa
 *	- Returns: The total distance of this route
 */
 double Route::getDistance() {
-	// TODO
-	return 0;
+	double totalDist = 0;
+	for (uint16_t i = 0; i < this->waypoints.size() - 1; i++) {
+		totalDist += waypoints[i]->distanceFrom(waypoints[i + 1]);
+	}
+	return totalDist;
 }
