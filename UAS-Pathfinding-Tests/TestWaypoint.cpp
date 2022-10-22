@@ -35,7 +35,7 @@ TEST(WaypointTests, distanceFrom2A) {
 	waypointA.y = 56.7;
 	waypointB.y = 556.678;
 
-	ASSERT_EQ(606.945, waypointA.distanceFrom(&waypointB));
+	ASSERT_EQ(606.945, int(waypointA.distanceFrom(&waypointB) * 1000) / (double) 1000);
 	EXPECT_TRUE(true);
 }
 
@@ -45,7 +45,7 @@ TEST(WaypointTests, distanceFrom2B) {
 	waypointA.y = 56.7;
 	waypointB.y = 556.678;
 
-	ASSERT_EQ(606.94547570931, waypointB.distanceFrom(&waypointA));
+	ASSERT_EQ(606, int(waypointB.distanceFrom(&waypointA)));
 	EXPECT_TRUE(true);
 }
 
@@ -55,7 +55,7 @@ TEST(WaypointTests, distanceFrom3A) {
 	waypointA.y = 234.8;
 	waypointB.y = 68.456;
 
-	ASSERT_EQ(206.28699992001, waypointA.distanceFrom(&waypointB));
+	ASSERT_EQ(206, int(waypointA.distanceFrom(&waypointB)));
 	EXPECT_TRUE(true);
 }
 
@@ -65,7 +65,7 @@ TEST(WaypointTests, distanceFrom3B) {
 	waypointA.y = 234.8;
 	waypointB.y = 68.456;
 
-	ASSERT_EQ(206.28699992001, waypointB.distanceFrom(&waypointA));
+	ASSERT_EQ(206, int(waypointB.distanceFrom(&waypointA)));
 	EXPECT_TRUE(true);
 }
 

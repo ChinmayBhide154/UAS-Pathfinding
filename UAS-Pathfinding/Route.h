@@ -11,6 +11,7 @@ public:
 	double dollarValue;
 	
 	// Constructors
+	Route();
 	Route(std::vector<Waypoint*> waypoints, std::string name, double dollarValue);
 
 	// Destructors

@@ -1,5 +1,8 @@
 #include "Route.h"
 
+
+Route::Route(){}
+
 Route::Route(std::vector<Waypoint*> waypoints, std::string name, double dollarValue)
 	: waypoints(waypoints), name(name), dollarValue(dollarValue) {};
 
@@ -15,3 +18,5 @@ double Route::getDistance() {
 	}
 	return totalDist;
 }
+
+//method: mid Flight: buildRoute
