@@ -1,14 +1,16 @@
 #include "Graph.h"
 
-Graph::Graph(std::vector<Edge*> edges, std::vector<Route*> routes)
-	: edges(edges), routes(routes) {};
+Graph::Graph(std::vector<int*> distances, std::vector<Waypoint*> waypoints) {
+	distances = distances;
+	waypoints = waypoints;
+}
 
 /*
 * std::vector<Route*> Graph::findShortestTraversal()
 *	- Returns: the optimal sequence of routes to take
 */
-std::vector<Route*> Graph::findShortestTraversal() {
+std::vector<Waypoint*> Graph::findShortestTraversal() {
 	// TODO
-	std::vector<Route*> retArr = std::vector<Route*>();
-	return retArr;
+	std::vector<Waypoint*> shortestTraversal = std::vector<Waypoint*>();
+	return shortestTraversal;
 }

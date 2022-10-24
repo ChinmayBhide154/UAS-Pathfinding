@@ -6,18 +6,23 @@
 class Graph
 {
 private:
-	std::vector<Edge*> edges;
+	std::vector<int*> edges;
 	std::vector<Route*> routes;
+	std::vector<Waypoint*> waypoints;
 
 public:
 	// Constructors
-	Graph(std::vector<Edge*> edges, std::vector<Route*> routes);
 
-	// Destructors
+	//Graph of Routes with Rank as edges
+	Graph(std::vector<int*> ranks, std::vector<Route*> routes);
+
+	//Graph of Waypoints with Distances as edges
+	Graph(std::vector<int*> distances, std::vector<Waypoint*> waypoints);
 
 
 	// Functions
-	std::vector<Route*> findShortestTraversal();
-
+	Graph buildGraph();
+	std::vector<Waypoint*> findShortestTraversal();
+	
 };
 
