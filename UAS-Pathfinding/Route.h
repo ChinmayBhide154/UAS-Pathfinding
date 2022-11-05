@@ -21,5 +21,12 @@ public:
 	* - Returns: The total distance of this route
 	*/
 	double getDistance();
+
+	/*
+	* compare routes
+	*/
+	bool operator==(const Route& compare) {
+		return this->name == compare.name && this->dollarValue == compare.dollarValue;
+	}
 };
 
