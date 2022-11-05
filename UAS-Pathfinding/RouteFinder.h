@@ -6,26 +6,28 @@
 class RouteFinder
 {
 private:
-	std::vector<Edge*> edges;
 	std::vector<Route*> routes;
+	double** adjMatrix;
+	uint32_t numNodes;
 
 public:
 	// Constructors
-	RouteFinder(std::vector<Edge*> edges, std::vector<Route*> routes);
+	RouteFinder(std::vector<Route*> routes, Waypoint* firstPoint);
 
 	// Destructors
-
+	~RouteFinder();
 
 	// Functions
-	std::vector<Route*> findShortestTraversal(Waypoint* firstPoint, double maxDist);
-	// void graphRecursionHelper(vector<vector<double>>* memoizedRankCalc, vector<vector<double>>* memoizedDistTravelled, vector<vector<uint32_t>>* memoizedTravelledRoutes, vector<vector<double>>* ranks);
-
+	std::vector<Route*> findShortestTraversal(double maxDist);
 
 private:
-	// Graph variables
-	vector<int> oddNodes;
+	// Traversal helper functions
+	void primsMST(double** result, bool* chosen);
+	void getOddDegreeNodes(double** subEdges, bool* subNodes, bool* result);
+	void extractSubgraph(uint32_t* numNodes, uint32_t* numEdges, bool* subNodes, double** result);
+	void findMinWeightPerfectMatching(uint32_t* numNodes, uint32_t* numEdges, bool* subNodes, double** subGraph, double** result);
+	void findEulerTour(bool* subNodes, double** subGraph, vector<Route*>* result);
 
+	// Function to port to library
 
-	// Traversal functions
-	void findMST();
 };
