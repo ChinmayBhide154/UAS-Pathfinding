@@ -13,7 +13,8 @@ int main()
 {
     std::ifstream f("Text.json");
     json data = json::parse(f);
-    std::cout << data.at("Name");
-
+    json otherdata = data.at("Name");
+    std::cout << otherdata.at("id1");
+    std::cout << otherdata.at("id2");
     return 0;
 }
