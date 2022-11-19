@@ -6,7 +6,7 @@
 
 
 Waypoint::Waypoint(){}
-Waypoint::Waypoint(double xLat, double yLong, bool isGps, string name, double refLat, double refLong) : name(name) {
+Waypoint::Waypoint(double xLat, double yLong, bool isGps, string name, double refLat, double refLong, int id) : name(name), id(id) {
 	if (isGps) {
 		lat = xLat;
 		lon = yLong;

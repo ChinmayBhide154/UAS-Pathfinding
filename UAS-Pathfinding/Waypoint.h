@@ -14,10 +14,11 @@ class Waypoint
 		double lat;
 		double lon;
 		string name;
+		int id;
 
 	//Constructors
 	Waypoint();
-	Waypoint(double xLat, double yLong, bool isGps, string name, double refLat, double refLong);
+	Waypoint(double xLat, double yLong, bool isGps, string name, double refLat, double refLong, int id);
 
 	//Functions
 	double distanceFrom(Waypoint* target);
