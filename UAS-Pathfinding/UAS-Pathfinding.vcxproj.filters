@@ -60,4 +60,9 @@
       <Filter>Header Files\Submodules</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Text.json">
+      <Filter>Source Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

@@ -1,12 +1,20 @@
+/*
+
 #include "JSON.h"
+
+
 #include <fstream>
 // #include <nlohmann/json.hpp>    // NOTE: Change to the line below
 #include "../submodules/json/single_include/nlohmann/json.hpp"
 using json = nlohmann::json;
 
-/*reads a json file and returns a Graph
-File is named input.json
+//reads a json file and returns a Graph
+//File is named input.json
+
+std::ifstream f("Text.json");
+json data = json::parse(f);
 */
+/*
 namespace ns {
     void to_json(json& j, const graph& g) {
         j = json{{"Route", g.route}, 
@@ -67,7 +75,7 @@ routes [
 // conversion: json -> Graph
 auto g2 = j.get<ns::"graph">();
 assert(g == g2);
-
+*/
 
 
 
@@ -84,18 +92,24 @@ File is named output.json
             {name: 4, waypoints: [ waypoint69, waypoint420]} ]
 }
 */
-
+/*
 ns::BestRoutes r: [
     [ {name: 1, waypoints: [ waypoint0, waypoint1]},
             {name: 2, waypoints: [ waypoint2, waypoint6754, waypoint3]},
             {name: 3, waypoints: [ waypoint3, waypoint999]},
             {name: 4, waypoints: [ waypoint69, waypoint420]} ]
 ]
+*/
 // conversion: person -> json
+/*
 json j = BestRoutes;
 //std::cout << j << std::endl;
 
 // write prettified JSON to another file
 std::ofstream o("output.json");
 o << std::setw(4) << j << std::endl;
+*/
+
+
+
 
