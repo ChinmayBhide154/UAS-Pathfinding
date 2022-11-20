@@ -7,3 +7,6 @@
 [submodule "submodules/Minimum-Cost-Perfect-Matching"]
 	path = submodules/Minimum-Cost-Perfect-Matching
 	url = https://github.com/dilsonpereira/Minimum-Cost-Perfect-Matching.git
+[submodule "submodules/edmonds-alg"]
+	path = submodules/edmonds-alg
+	url = https://github.com/atofigh/edmonds-alg.git

@@ -117,7 +117,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\submodules\json\single_include\nlohmann;$(SolutionDir)..\submodules\WGS84toCartesian\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\submodules\json\single_include\nlohmann;$(SolutionDir)..\submodules\WGS84toCartesian\;D:\UAS\uas-pathfinding\submodules\Minimum-Cost-Perfect-Matching;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,20 +141,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\BinaryHeap.cpp" />
+    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Example.cpp" />
+    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Graph.cpp" />
+    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Matching.cpp" />
     <ClCompile Include="Edge.cpp" />
-    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="JSON.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Route.cpp" />
+    <ClCompile Include="RouteFinder.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="Waypoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\submodules\json\single_include\nlohmann\json.hpp" />
+    <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\BinaryHeap.h" />
+    <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\Globals.h" />
+    <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\Graph.h" />
+    <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\Matching.h" />
     <ClInclude Include="..\submodules\WGS84toCartesian\WGS84toCartesian.hpp" />
     <ClInclude Include="Edge.h" />
-    <ClInclude Include="Graph.h" />
     <ClInclude Include="JSON.h" />
     <ClInclude Include="Route.h" />
+    <ClInclude Include="RouteFinder.h" />
     <ClInclude Include="Waypoint.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

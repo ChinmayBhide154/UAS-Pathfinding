@@ -47,6 +47,7 @@
     <ClCompile Include="TestGraph.cpp" />
     <ClCompile Include="TestJSON.cpp" />
     <ClCompile Include="TestRoute.cpp" />
+    <ClCompile Include="TestRouteFinder.cpp" />
     <ClCompile Include="TestWaypoint.cpp" />
   </ItemGroup>
   <ItemGroup>

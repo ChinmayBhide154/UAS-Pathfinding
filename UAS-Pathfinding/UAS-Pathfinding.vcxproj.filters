@@ -16,12 +16,12 @@
     <Filter Include="Header Files\Submodules">
       <UniqueIdentifier>{301bf40e-6333-4439-804d-9bc03e74cb86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Submodules">
+      <UniqueIdentifier>{cb0e939f-3026-487f-b198-890bd31f53cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Edge.cpp">
@@ -36,11 +36,26 @@
     <ClCompile Include="Route.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RouteFinder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\BinaryHeap.cpp">
+      <Filter>Source Files\Submodules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Example.cpp">
+      <Filter>Source Files\Submodules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Graph.cpp">
+      <Filter>Source Files\Submodules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Matching.cpp">
+      <Filter>Source Files\Submodules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Graph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Edge.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -57,6 +72,21 @@
       <Filter>Header Files\Submodules</Filter>
     </ClInclude>
     <ClInclude Include="..\submodules\WGS84toCartesian\WGS84toCartesian.hpp">
+      <Filter>Header Files\Submodules</Filter>
+    </ClInclude>
+    <ClInclude Include="RouteFinder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\Graph.h">
+      <Filter>Header Files\Submodules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\Matching.h">
+      <Filter>Header Files\Submodules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\BinaryHeap.h">
+      <Filter>Header Files\Submodules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\Globals.h">
       <Filter>Header Files\Submodules</Filter>
     </ClInclude>
   </ItemGroup>
