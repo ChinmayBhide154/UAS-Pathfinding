@@ -9,9 +9,9 @@
 #include "..\submodules\Minimum-Cost-Perfect-Matching\Matching.cpp"
 #include "..\submodules\Minimum-Cost-Perfect-Matching\BinaryHeap.cpp"
 
-Waypoint wp0 = Waypoint::Waypoint(0, 17, false, "wp0", 49.269309, -123.242703);
-Waypoint wp1 = Waypoint::Waypoint(17, 17, false, "wp1", 49.269309, -123.242703);
-Waypoint wp2 = Waypoint::Waypoint(17, 0, false, "wp2", 49.269309, -123.242703);
+Waypoint wp0 = Waypoint::Waypoint(0, 10, false, "wp0", 49.269309, -123.242703);
+Waypoint wp1 = Waypoint::Waypoint(10, 10, false, "wp1", 49.269309, -123.242703);
+Waypoint wp2 = Waypoint::Waypoint(10, 0, false, "wp2", 49.269309, -123.242703);
 Waypoint wp3 = Waypoint::Waypoint(0, 0, false, "wp3", 49.269309, -123.242703);
 Waypoint wp4 = Waypoint::Waypoint(5, 5, false, "wp4", 49.269309, -123.242703);
 Waypoint wp10 = Waypoint::Waypoint(0, 20, false, "wp0", 49.269309, -123.242703);
@@ -34,9 +34,9 @@ TEST(RouteFinderTests, projectConfigTest) {
 	std::vector<Waypoint*> test0{&wp4, &wp2, &wp3};
 	Route r0 = Route::Route(test0, "r0", 200.0);
 	std::vector<Waypoint*> test1{&wp3, &wp2};
-	Route r1 = Route::Route(test1, "r1", 170000.0);
+	Route r1 = Route::Route(test1, "r1", 200);
 	std::vector<Waypoint*> test2{&wp2, &wp1};
-	Route r2 = Route::Route(test2, "r2", 1.0);
+	Route r2 = Route::Route(test2, "r2", 200.0);
 	std::vector<Waypoint*> test4{&wp20, &wp22};
 	Route r3 = Route::Route(test4, "r2", 132.0);
 	

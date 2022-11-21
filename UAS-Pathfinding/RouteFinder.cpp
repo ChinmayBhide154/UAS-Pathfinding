@@ -8,6 +8,7 @@
 #include <stack>
 #include <sstream>
 #include <fstream>
+#include <iostream>
 
 #define FLOAT_MAX 			3.402823465E38
 #define DOUBLE_MAX			1.7976931348623157E308
@@ -76,6 +77,7 @@ std::vector<Route*> RouteFinder::findShortestTraversal() {
 	memset(visited, false, sizeof(bool) * this->numNodes);
 	double cost = 0;
 	minimumCost(0, visited, &cost, &retArr);
+	std::cout << "Cost: " << cost << std::endl;
 	retArr.pop_back();
 
 
