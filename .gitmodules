@@ -4,6 +4,3 @@
 [submodule "submodules/json"]
 	path = submodules/json
 	url = https://github.com/nlohmann/json.git
-[submodule "submodules/Minimum-Cost-Perfect-Matching"]
-	path = submodules/Minimum-Cost-Perfect-Matching
-	url = https://github.com/dilsonpereira/Minimum-Cost-Perfect-Matching.git
