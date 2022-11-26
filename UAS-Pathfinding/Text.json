@@ -1,0 +1,56 @@
+{
+	"Waypoint0": {
+		"refLat": 22.0,
+		"refLong": 34.1,
+		"waypointId": 0
+	},
+
+	"Waypoint1": {
+		"refLat": 0.0,
+		"refLong": 0.0,
+		"waypointId": 4
+	},
+
+	"Waypoint2": {
+		"refLat": 21.0,
+		"refLong": 34.0,
+		"waypointId": 3
+	},
+
+	"Waypoint3": {
+		"refLat": 2.0,
+		"refLong": 4.1,
+		"waypointId": 2
+	},
+
+	"Route0": {
+		"waypointIds": [ 4, 3, 4 ],
+		"routeID": 2,
+		"dollarValue": 5.6
+	},
+
+	"Route1": {
+		"waypointIds": [ 4, 3, 4 ],
+		"routeID": 5,
+		"dollarValue": 5.6
+	},
+
+	"Route2": {
+		"waypointIds": [ 4, 3, 4 ],
+		"routeID": 1,
+		"dollarValue": 5.6
+	},
+
+	"RouteFinder": {
+		"routeIds": [ 1, 5, 2 ],
+		"maxFlyingDistance": 40.6,
+		"startingWaypointId": 1
+	},
+
+	"ReRouter": {
+		"currentLong": 50.4,
+		"currentLat": 60.8,
+		"waypointObstacleIds": [ 1, 5, 2 ],
+		"reRouteWaypointId": 3
+	}
+}

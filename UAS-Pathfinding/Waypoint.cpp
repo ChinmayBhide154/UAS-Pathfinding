@@ -85,7 +85,7 @@ bool Waypoint::onWaypointLineSegment(Waypoint* waypoint1, Waypoint* waypoint2, W
 // 2 --> Counterclockwise
 
 int Waypoint::findOrientation(Waypoint* waypoint1, Waypoint* waypoint2, Waypoint* waypoint3) {
-	int orientation = (waypoint2->y - waypoint1->y) * (waypoint3->x - waypoint2->x) - (waypoint2->x - waypoint1->x) * (waypoint3->y - waypoint2->y);
+	double orientation = (waypoint2->y - waypoint1->y) * (waypoint3->x - waypoint2->x) - (waypoint2->x - waypoint1->x) * (waypoint3->y - waypoint2->y);
 
 	if (orientation == 0) return 0; // collinear
 

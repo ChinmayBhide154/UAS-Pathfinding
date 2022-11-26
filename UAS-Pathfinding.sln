@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UAS-Pathfinding", "UAS-Pathfinding\UAS-Pathfinding.vcxproj", "{D100EFC4-4BDD-417D-9FB4-D091ACA8F8E2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UAS-Pathfinding-Tests", "UAS-Pathfinding-Tests\UAS-Pathfinding-Tests.vcxproj", "{84028255-9592-440D-BB45-A773DA60CC72}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D100EFC4-4BDD-417D-9FB4-D091ACA8F8E2} = {D100EFC4-4BDD-417D-9FB4-D091ACA8F8E2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

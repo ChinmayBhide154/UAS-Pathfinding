@@ -38,6 +38,8 @@
 /.vs
 *.pdb
 /packages
+.vscode
+.DS_Store
 
 *.ilk
 *.exp

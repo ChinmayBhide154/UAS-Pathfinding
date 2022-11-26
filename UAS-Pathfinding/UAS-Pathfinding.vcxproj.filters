@@ -42,17 +42,11 @@
     <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\BinaryHeap.cpp">
       <Filter>Source Files\Submodules</Filter>
     </ClCompile>
-    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Example.cpp">
-      <Filter>Source Files\Submodules</Filter>
-    </ClCompile>
     <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Graph.cpp">
       <Filter>Source Files\Submodules</Filter>
     </ClCompile>
     <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Matching.cpp">
       <Filter>Source Files\Submodules</Filter>
-    </ClCompile>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,5 +83,10 @@
     <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\Globals.h">
       <Filter>Header Files\Submodules</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Text.json">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

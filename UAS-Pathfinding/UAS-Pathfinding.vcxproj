@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -54,10 +53,8 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="Shared">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -142,7 +139,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\BinaryHeap.cpp" />
-    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Example.cpp" />
     <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Graph.cpp" />
     <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Matching.cpp" />
     <ClCompile Include="Edge.cpp" />
@@ -150,7 +146,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="RouteFinder.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="Waypoint.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,8 +160,12 @@
     <ClInclude Include="Route.h" />
     <ClInclude Include="RouteFinder.h" />
     <ClInclude Include="Waypoint.h" />
+    <Content Include="input.json" />
+    <Content Include="output.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Text.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>
