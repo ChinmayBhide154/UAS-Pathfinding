@@ -7,7 +7,7 @@ Graph::Graph(std::vector<Waypoint*> waypoints) {
 }
 
 vector<vector<double>> Graph::getGraphMatrix(vector<Waypoint*> obstacles, Waypoint* target) {
-    vector<vector<double>> matrix(5, vector<double>(5));
+    vector<vector<double>> matrix(max, vector<double>(5));
     for (int i = 0; i < waypoints.size() - 1; i++) {
         for (int j = 0; j < waypoints.size() - 1; j++) {
             if (waypoints[j]->isObstructionN(obstacles, target)) {
