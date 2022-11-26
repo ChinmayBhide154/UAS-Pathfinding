@@ -17,14 +17,16 @@ using json = nlohmann::json;
 #define NUM_WAYPOINTS 4
 int main()
 {
+    std::cout << "program start\n";
     std::ifstream f("Text.json");
     json data = json::parse(f);
-    std::vector<Waypoint*> listWaypoints{};
+    std::vector<Waypoint *> listWaypoints{};
+    std::cout << "start reading waypoint\n";
     for (uint32_t i = 0; i < NUM_WAYPOINTS; i++) {
         json waypoint = data[(std::string) ("Waypoint" + std::to_string(i))];
         listWaypoints.push_back(new Waypoint(waypoint["refLat"], waypoint["refLong"], true, std::to_string((uint32_t) waypoint["waypointId"]), 0, 0));
     }
-
+    std::cout<<"start reading routes\n";
     std::vector<Route*> listRoutes{};
     for (uint32_t i = 0; i < NUM_ROUTES; i++) {
         json route = data["Route" + std::to_string(i)];

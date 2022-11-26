@@ -26,4 +26,6 @@ cd x64
 make clean 
 make all 
 make install 
-echo "Libraries can be found at: ../../../../bin" 
+cd ..
+cd ..
+echo "Libraries can be found at: ../../bin" 
