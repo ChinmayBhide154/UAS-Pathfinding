@@ -1,6 +1,6 @@
 #include "pch.h"
-#include <C:\Users\chinm\OneDrive\Documents\UAS-PathFinding\pathfinding\UAS-Pathfinding\Waypoint.h>
-#include <C:\Users\chinm\OneDrive\Documents\UAS-PathFinding\pathfinding\UAS-Pathfinding\Waypoint.cpp>
+#include "..\UAS-Pathfinding\Waypoint.h"
+#include "..\UAS-Pathfinding\Waypoint.cpp"
 
 Waypoint waypointA;
 Waypoint waypointB;
