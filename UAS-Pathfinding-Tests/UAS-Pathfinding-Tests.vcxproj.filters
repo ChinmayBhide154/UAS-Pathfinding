@@ -20,6 +20,9 @@
     <ClCompile Include="TestWaypoint.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="TestRouteFinder.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
