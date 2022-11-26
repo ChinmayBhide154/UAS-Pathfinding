@@ -21,6 +21,7 @@ RELEASEFLAGS = -O3
 OBJECTFLAGS = -c -fmessage-length=0 -fPIC -MMD -MP
 
 SOURCES = $(wildcard ../../../*.cpp) $(wildcard ../../../../submodules/Minimum-Cost-Perfect-Matching/*.cpp)
+SOURCES := $(filter-out ../../../../submodules/Minimum-Cost-Perfect-Matching/Example.cpp, $(SOURCES))
 OBJECTS = $(addprefix obj/,$(notdir $(SOURCES:.cpp=.o)))
 INCLUDES = -I../../.. -I../../../../submodules/Minimum-Cost-Perfect-Matching -I../../../../submodules/json/single_include/nlohmann -I../../../../submodules/WGS84toCartesian
 # LIBPATH = -L../
@@ -38,6 +39,15 @@ $(DNAME): $(OBJECTS)
 	@echo 'Building target: $@'
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $(DNAME) $(OBJECTS)
 	@echo 'Finished building target: $@'
+	@echo ' '
+	
+# Dependency source files for the binary
+obj/%.o: ../../../../submodules/Minimum-Cost-Perfect-Matching/%.cpp
+	@mkdir -p obj
+	@echo 'Building file: $<'
+	@echo 'Invoking: GCC C++ Compiler'
+	$(CC) $(DEBUGFLAGS) $(CFLAGS) $(OBJECTFLAGS) $(INCLUDES) -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o $@ $<
+	@echo 'Finished building: $<'
 	@echo ' '
 
 # General source files for the binary

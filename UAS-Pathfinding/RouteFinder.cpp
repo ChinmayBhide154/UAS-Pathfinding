@@ -4,6 +4,7 @@
 #include "../submodules/Minimum-Cost-Perfect-Matching/Matching.h"
 #include "../submodules/Minimum-Cost-Perfect-Matching/Graph.h"
 #include <cstdlib>
+#include <cstring>
 #include <string>
 #include <stack>
 #include <sstream>
@@ -52,7 +53,7 @@ RouteFinder::RouteFinder(std::vector<Route*> routes, Waypoint* firstPoint, doubl
 
 					// Edge weight = total_dist / $ => smaller is better
 					adjMatrix[i][j] = (distance + routes[j]->getDistance()) / routes[j]->dollarValue;
-					_ASSERT(adjMatrix[i][j] >= 0);
+					// _ASSERT(adjMatrix[i][j] >= 0);
 				}
 			}
 		}
@@ -240,7 +241,7 @@ void RouteFinder::primsMST(double** result, bool* chosen) {
 			if (chosen[i]) {
 				for (uint32_t j = 0; j < this->numNodes; j++) {
 					if (!chosen[j] && this->adjMatrix[i][j] != -1) {
-						_ASSERT(i != j);
+						// _ASSERT(i != j);
 						if (this->adjMatrix[i][j] < min) {
 							min = this->adjMatrix[i][j];
 							nodeInd0 = i;
