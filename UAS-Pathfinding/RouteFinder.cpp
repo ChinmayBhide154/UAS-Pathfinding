@@ -77,7 +77,7 @@ std::vector<Route*> RouteFinder::findShortestTraversal() {
 	memset(visited, false, sizeof(bool) * this->numNodes);
 	double cost = 0;
 	minimumCost(0, visited, &cost, &retArr);
-	std::cout << "Cost: " << cost << std::endl;
+	std::cout << "Cost: " <<	 cost << std::endl;
 	retArr.pop_back();
 
 
