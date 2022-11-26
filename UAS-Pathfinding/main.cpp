@@ -3,7 +3,6 @@
 */
 #include <iostream>
 #include <vector>
-#include "Waypoint.h"
 #include "Route.h"
 #include "RouteFinder.h"
 int main()
