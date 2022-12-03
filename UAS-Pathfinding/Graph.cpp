@@ -6,6 +6,8 @@ Graph::Graph(std::vector<Waypoint*> waypoints) {
     this->waypoints = waypoints;
 }
 
+Graph::Graph(){}
+
 vector<vector<double>> Graph::getGraphMatrix(vector<Waypoint*> obstacles, Waypoint* target) {
     vector<vector<double>> matrix(max, vector<double>(5));
     for (int i = 0; i < waypoints.size() - 1; i++) {
@@ -24,11 +26,10 @@ vector<vector<double>> Graph::getGraphMatrix(vector<Waypoint*> obstacles, Waypoi
     return matrix;
 }
 
-void Graph::dijkstra(int n, int startnode, vector<Waypoint*> obstacles, Waypoint* target) {
-    vector<vector<double>> G = this->getGraphMatrix(obstacles, target);
-    int cost[5][5], distance[5], pred[5];
-    int visited[5], count, mindistance, nextnode, i, j;
-    
+vector<int> Graph::dijkstra(vector<vector<int>> G, int n, int startnode, int destinationNode) {
+    int cost[max][max], distance[max], pred[max];
+    vector<int> shortestPath = {};
+    int visited[max], count, mindistance, nextnode, i, j;
     for (i = 0;i < n;i++)
         for (j = 0;j < n;j++)
             if (G[i][j] == 0)
@@ -59,17 +60,27 @@ void Graph::dijkstra(int n, int startnode, vector<Waypoint*> obstacles, Waypoint
                 }
         count++;
     }
-    for (i = 0;i < n;i++)
-        if (i != startnode) {
-            cout << "Distance of node"<<i<<" = "<<distance[i];
-            cout << "Path = "<<i;
-            j = i;
-            
-            do {
-                j = pred[j];
-                cout << "<-" << j;
-            } while (j != startnode);
-        }
+
+    shortestPath.push_back(destinationNode);
+    j = destinationNode;
+    do {
+        j = pred[j];
+        shortestPath.push_back(j);
+    } while (j != startnode);
+
+    reverse(shortestPath.begin(), shortestPath.end());
+    return shortestPath;
+}
+
+
+vector<int> Graph::reroute(int continueOn, vector<vector<int>> G, int n, int startnode, int destinationNode) {
+    vector<int> totalPath = {};
+    vector<int> destinationPath = {};
+
+    totalPath = dijkstra(G, n, startnode, continueOn);
+    destinationPath = dijkstra(G, n, continueOn, destinationNode);
+    totalPath.insert(totalPath.end(), destinationPath.begin(), destinationPath.end());
+    return totalPath;
 }
 
 

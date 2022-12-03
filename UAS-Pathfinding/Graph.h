@@ -20,10 +20,13 @@ class Graph {
 		vector<Waypoint*> waypoints;
 		vector<Waypoint*> obstacles;
 		Waypoint* target;
-
+		Waypoint* startnode;
+		int destinationNode;
+		Graph();
 		Graph(std::vector<Waypoint*> waypoints); 
 		vector<vector<double>> getGraphMatrix(vector<Waypoint*> obstacles, Waypoint* target);
-		void dijkstra(int n, int startnode, vector<Waypoint*> obstacles, Waypoint* target);
+		vector<int> reroute(int continueOn, vector<vector<int>> G, int n, int startnode, int destinationNode);
+		vector<int> dijkstra(vector<vector<int>> G, int n, int startnode, int destinationNode);
 };
 
 
