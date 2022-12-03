@@ -11,6 +11,7 @@
 #include <stdexcept>
 #include <map>
 #include "../submodules/json/single_include/nlohmann/json.hpp"
+
 using json = nlohmann::json;
 
 #define NUM_ROUTES 3
@@ -41,6 +42,23 @@ int main()
     json routeFinder = data["RouteFinder"];
     RouteFinder finder(listRoutes, listWaypoints[routeFinder["startingWaypointId"]], routeFinder["maxFlyingDistance"]);
     std::vector<Route*> result = finder.findShortestTraversal();
+
+    //serialize
+    std::vector<int> routeIDs = {};
+
+    for (int i = 0; i < result.size(); i++) {
+        routeIDs.push_back(std::stoi(result[i]->name));
+    }
+
+    json serializeRouteFinder = {
+        {"Routes", routeIDs}
+    };
+
+    std::ofstream output("output.json");
+    output << serializeRouteFinder;
+
+    output.close();
+
 
     // Temp: Print pathfinding results
     for (int i = 0; i < result.size(); i++) {
