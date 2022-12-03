@@ -14,17 +14,17 @@ using namespace std;
 
 
 class Graph {
-	public:
-		//std::vector<Waypoint*> waypoints;
-		//Waypoint* destination;
+
+	private:
 		vector<Waypoint*> waypoints;
-		vector<Waypoint*> obstacles;
-		Waypoint* target;
-		Waypoint* startnode;
-		int destinationNode;
+		vector<vector<double>> getGraphMatrix(vector<Waypoint*> obstacles, Waypoint* target);
+
+	public:
+		//constructors
 		Graph();
 		Graph(std::vector<Waypoint*> waypoints); 
-		vector<vector<double>> getGraphMatrix(vector<Waypoint*> obstacles, Waypoint* target);
+
+		//functions
 		vector<int> reroute(int continueOn, vector<vector<int>> G, int n, int startnode, int destinationNode);
 		vector<int> dijkstra(vector<vector<int>> G, int n, int startnode, int destinationNode);
 };
