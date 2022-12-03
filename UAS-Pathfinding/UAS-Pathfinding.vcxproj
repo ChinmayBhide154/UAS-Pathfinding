@@ -138,9 +138,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\BinaryHeap.cpp" />
-    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Graph.cpp" />
-    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Matching.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="JSON.cpp" />
     <ClCompile Include="main.cpp" />

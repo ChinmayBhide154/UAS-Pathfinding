@@ -5,9 +5,9 @@
 #include "..\UAS-Pathfinding\RouteFinder.h"
 #include "..\UAS-Pathfinding\RouteFinder.cpp"
 #include "..\UAS-Pathfinding\Route.cpp"
-#include "..\submodules\Minimum-Cost-Perfect-Matching\Graph.cpp"
-#include "..\submodules\Minimum-Cost-Perfect-Matching\Matching.cpp"
-#include "..\submodules\Minimum-Cost-Perfect-Matching\BinaryHeap.cpp"
+//#include "..\submodules\Minimum-Cost-Perfect-Matching\Graph.cpp"
+//#include "..\submodules\Minimum-Cost-Perfect-Matching\Matching.cpp"
+//#include "..\submodules\Minimum-Cost-Perfect-Matching\BinaryHeap.cpp"
 
 Waypoint wp0 = Waypoint::Waypoint(0, 10, false, "wp0", 49.269309, -123.242703);
 Waypoint wp1 = Waypoint::Waypoint(10, 10, false, "wp1", 49.269309, -123.242703);

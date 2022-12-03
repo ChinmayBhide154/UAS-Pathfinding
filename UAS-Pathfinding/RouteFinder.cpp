@@ -1,8 +1,8 @@
 #include <algorithm>
 #include "RouteFinder.h"
 
-#include "../submodules/Minimum-Cost-Perfect-Matching/Matching.h"
-#include "../submodules/Minimum-Cost-Perfect-Matching/Graph.h"
+//#include "../submodules/Minimum-Cost-Perfect-Matching/Matching.h"
+//#include "../submodules/Minimum-Cost-Perfect-Matching/Graph.h"
 #include <cstdlib>
 #include <string>
 #include <stack>
@@ -226,141 +226,141 @@ uint32_t RouteFinder::closest(uint32_t routeIndex, bool* visited, double* cost) 
 // Algorithm: https://www.programiz.com/dsa/prim-algorithm
 // NOTE: Prims wont work for directed graphs, which is what we have
 // Switch to Edmond's Algorithm
-void RouteFinder::primsMST(double** result, bool* chosen) {
-	uint32_t numEdges = 0;
-	chosen[0] = true;
-	uint32_t nodeInd0, nodeInd1;
+//void RouteFinder::primsMST(double** result, bool* chosen) {
+//	uint32_t numEdges = 0;
+//	chosen[0] = true;
+//	uint32_t nodeInd0, nodeInd1;
+//
+//	while (numEdges < this->numNodes - 1) {
+//		double min = DOUBLE_MAX;
+//		nodeInd0 = 0;
+//		nodeInd1 = 0;
+//
+//		for (uint32_t i = 0; i < this->numNodes; i++) {
+//			if (chosen[i]) {
+//				for (uint32_t j = 0; j < this->numNodes; j++) {
+//					if (!chosen[j] && this->adjMatrix[i][j] != -1) {
+//						_ASSERT(i != j);
+//						if (this->adjMatrix[i][j] < min) {
+//							min = this->adjMatrix[i][j];
+//							nodeInd0 = i;
+//							nodeInd1 = j;
+//						}
+//					}
+//				}
+//			}
+//		}
+//		result[nodeInd0][nodeInd1] = adjMatrix[nodeInd0][nodeInd1];
+//		result[nodeInd1][nodeInd0] = adjMatrix[nodeInd0][nodeInd1];
+//		chosen[nodeInd1] = true;
+//		numEdges++;
+//	}
+//}
 
-	while (numEdges < this->numNodes - 1) {
-		double min = DOUBLE_MAX;
-		nodeInd0 = 0;
-		nodeInd1 = 0;
-
-		for (uint32_t i = 0; i < this->numNodes; i++) {
-			if (chosen[i]) {
-				for (uint32_t j = 0; j < this->numNodes; j++) {
-					if (!chosen[j] && this->adjMatrix[i][j] != -1) {
-						_ASSERT(i != j);
-						if (this->adjMatrix[i][j] < min) {
-							min = this->adjMatrix[i][j];
-							nodeInd0 = i;
-							nodeInd1 = j;
-						}
-					}
-				}
-			}
-		}
-		result[nodeInd0][nodeInd1] = adjMatrix[nodeInd0][nodeInd1];
-		result[nodeInd1][nodeInd0] = adjMatrix[nodeInd0][nodeInd1];
-		chosen[nodeInd1] = true;
-		numEdges++;
-	}
-}
 
 
-
-void RouteFinder::getOddDegreeNodes(double** subEdges, bool* subNodes, bool* result) {
-	uint32_t count;
-	for (uint32_t i = 0; i < this->numNodes; i++) {
-		if (subNodes[i]) {
-			count = 0;
-			for (uint32_t j = 0; j < this->numNodes; j++) {
-				if (subEdges[i][j] != -1) {
-					count++;
-				}
-			}
-			if (count % 2 == 1) result[i] = true;
-		}
-	}
-}
-
-void RouteFinder::extractSubgraph(uint32_t* numEdges, uint32_t* numNodes, bool* subNodes, double** result) {
-	*numEdges = 0;
-	*numNodes = 0;
-	for (uint32_t i = 0; i < this->numNodes; i++) {
-		if (subNodes[i]) {
-			for (uint32_t j = 0; j < this->numNodes; j++) {
-				if (subNodes[j] && adjMatrix[i][j] != -1) {
-					result[i][j] = adjMatrix[i][j];
-					(*numEdges)++;
-				}
-			}
-			(*numNodes)++;
-		}
-	}
-}
+//void RouteFinder::getOddDegreeNodes(double** subEdges, bool* subNodes, bool* result) {
+//	uint32_t count;
+//	for (uint32_t i = 0; i < this->numNodes; i++) {
+//		if (subNodes[i]) {
+//			count = 0;
+//			for (uint32_t j = 0; j < this->numNodes; j++) {
+//				if (subEdges[i][j] != -1) {
+//					count++;
+//				}
+//			}
+//			if (count % 2 == 1) result[i] = true;
+//		}
+//	}
+//}
+//
+//void RouteFinder::extractSubgraph(uint32_t* numEdges, uint32_t* numNodes, bool* subNodes, double** result) {
+//	*numEdges = 0;
+//	*numNodes = 0;
+//	for (uint32_t i = 0; i < this->numNodes; i++) {
+//		if (subNodes[i]) {
+//			for (uint32_t j = 0; j < this->numNodes; j++) {
+//				if (subNodes[j] && adjMatrix[i][j] != -1) {
+//					result[i][j] = adjMatrix[i][j];
+//					(*numEdges)++;
+//				}
+//			}
+//			(*numNodes)++;
+//		}
+//	}
+//}
 
 // This algorithm is too big brain for me to comprehend
 // Just gonna port it to use this library: https://github.com/dilsonpereira/Minimum-Cost-Perfect-Matching
-void RouteFinder::findMinWeightPerfectMatching(uint32_t* numNodes, uint32_t* numEdges, bool* subNodes, double** subGraph, double** result) {
-	Graph G(this->numNodes);
-	vector<double> cost(*numEdges);
-	for (uint32_t i = 0; i < this->numNodes; i++) {
-		if (subNodes[i]) {
-			for (uint32_t j = 0; j < this->numNodes; j++) {
-				if (subGraph[i][j] != -1) {
-					G.AddEdge(i, j);
-					uint64_t tmp = G.GetEdgeIndex(i, j);
-					cost[G.GetEdgeIndex(i, j)] = (int)(subGraph[i][j] * INT_DOUBLE_ACCURACY);		// This library processes ints, multiply for fixed accuracy increase
-				}
-			}
-		}
-	}
-	
-	Matching M(G);
-	try {
-		pair<list<int>, double> solution = M.SolveMinimumCostPerfectMatching(cost);
-		for (list<int>::iterator it = solution.first.begin(); it != solution.first.end(); it++) {
-			pair<int, int> e = G.GetEdge(*it);
-			result[e.first][e.second] = (double)G.GetEdgeIndex(e.first, e.second) / (double)INT_DOUBLE_ACCURACY;
-			result[e.second][e.first] = (double)G.GetEdgeIndex(e.first, e.second) / (double)INT_DOUBLE_ACCURACY;
-		}
-	}
-	catch (...) {
-		// Perfect matching not found, graph probably too small for matching
-		for (uint32_t i = 0; i < this->numNodes; i++) {
-			for (uint32_t j = 0; j < this->numNodes; j++) {
-				if (subGraph[i][j] != -1)
-					result[i][j] = subGraph[i][j];
-			}
-		}
-	}
-	
-}
+//void RouteFinder::findMinWeightPerfectMatching(uint32_t* numNodes, uint32_t* numEdges, bool* subNodes, double** subGraph, double** result) {
+//	Graph G(this->numNodes);
+//	vector<double> cost(*numEdges);
+//	for (uint32_t i = 0; i < this->numNodes; i++) {
+//		if (subNodes[i]) {
+//			for (uint32_t j = 0; j < this->numNodes; j++) {
+//				if (subGraph[i][j] != -1) {
+//					G.AddEdge(i, j);
+//					uint64_t tmp = G.GetEdgeIndex(i, j);
+//					cost[G.GetEdgeIndex(i, j)] = (int)(subGraph[i][j] * INT_DOUBLE_ACCURACY);		// This library processes ints, multiply for fixed accuracy increase
+//				}
+//			}
+//		}
+//	}
+//	
+//	Matching M(G);
+//	try {
+//		pair<list<int>, double> solution = M.SolveMinimumCostPerfectMatching(cost);
+//		for (list<int>::iterator it = solution.first.begin(); it != solution.first.end(); it++) {
+//			pair<int, int> e = G.GetEdge(*it);
+//			result[e.first][e.second] = (double)G.GetEdgeIndex(e.first, e.second) / (double)INT_DOUBLE_ACCURACY;
+//			result[e.second][e.first] = (double)G.GetEdgeIndex(e.first, e.second) / (double)INT_DOUBLE_ACCURACY;
+//		}
+//	}
+//	catch (...) {
+//		// Perfect matching not found, graph probably too small for matching
+//		for (uint32_t i = 0; i < this->numNodes; i++) {
+//			for (uint32_t j = 0; j < this->numNodes; j++) {
+//				if (subGraph[i][j] != -1)
+//					result[i][j] = subGraph[i][j];
+//			}
+//		}
+//	}
+//	
+//}
 
 // Algorithm: https://cp-algorithms.com/graph/euler_path.html#algorithm
 // DEBUG: Mutates subgraph
-void RouteFinder::findEulerTour(bool* subNodes, double** subGraph, vector<Route*>* result) {
-	bool* addedToTour = new bool[this->numNodes];
-	memset(addedToTour, false, sizeof(bool) * this->numNodes);
-	std::stack<uint32_t> nodeStack;
-	nodeStack.push(0);		// We must start at index 0, it is the starting waypoint
-	result->push_back(this->routes[0]);
-
-	uint32_t degreeCount, currIndex;
-	while (!nodeStack.empty()) {
-		degreeCount = 0;
-		currIndex = nodeStack.top();
-		for (uint32_t i = 0; i < this->numNodes; i++) {
-			if (subGraph[currIndex][i] != -1 && !addedToTour[i]) {
-				degreeCount++;
-
-				// Remove edge from subgraph
-				subGraph[currIndex][i] = -1;
-				subGraph[i][currIndex] = -1;
-				nodeStack.push(i);
-			} 
-		}
-		
-		if (degreeCount == 0) {
-			if (!addedToTour[currIndex]) {
-				if (currIndex != 0) result->push_back(this->routes[currIndex]);
-				addedToTour[currIndex] = true;
-			}
-			nodeStack.pop();
-		}
-	}
-	
-	delete[] addedToTour;
-}
+//void RouteFinder::findEulerTour(bool* subNodes, double** subGraph, vector<Route*>* result) {
+//	bool* addedToTour = new bool[this->numNodes];
+//	memset(addedToTour, false, sizeof(bool) * this->numNodes);
+//	std::stack<uint32_t> nodeStack;
+//	nodeStack.push(0);		// We must start at index 0, it is the starting waypoint
+//	result->push_back(this->routes[0]);
+//
+//	uint32_t degreeCount, currIndex;
+//	while (!nodeStack.empty()) {
+//		degreeCount = 0;
+//		currIndex = nodeStack.top();
+//		for (uint32_t i = 0; i < this->numNodes; i++) {
+//			if (subGraph[currIndex][i] != -1 && !addedToTour[i]) {
+//				degreeCount++;
+//
+//				// Remove edge from subgraph
+//				subGraph[currIndex][i] = -1;
+//				subGraph[i][currIndex] = -1;
+//				nodeStack.push(i);
+//			} 
+//		}
+//		
+//		if (degreeCount == 0) {
+//			if (!addedToTour[currIndex]) {
+//				if (currIndex != 0) result->push_back(this->routes[currIndex]);
+//				addedToTour[currIndex] = true;
+//			}
+//			nodeStack.pop();
+//		}
+//	}
+//	
+//	delete[] addedToTour;
+//}
 

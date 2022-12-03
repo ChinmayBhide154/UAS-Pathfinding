@@ -39,15 +39,6 @@
     <ClCompile Include="RouteFinder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\BinaryHeap.cpp">
-      <Filter>Source Files\Submodules</Filter>
-    </ClCompile>
-    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Graph.cpp">
-      <Filter>Source Files\Submodules</Filter>
-    </ClCompile>
-    <ClCompile Include="..\submodules\Minimum-Cost-Perfect-Matching\Matching.cpp">
-      <Filter>Source Files\Submodules</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Edge.h">

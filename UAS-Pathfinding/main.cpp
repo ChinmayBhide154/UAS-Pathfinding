@@ -55,6 +55,8 @@ int main()
     std::ofstream output("output.json");
     output << serializeRouteFinder;
 
+    output.close();
+
 
     // Temp: Print pathfinding results
     for (int i = 0; i < result.size(); i++) {
