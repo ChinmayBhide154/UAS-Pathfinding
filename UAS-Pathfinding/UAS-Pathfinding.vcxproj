@@ -152,8 +152,6 @@
     <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\Graph.h" />
     <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\Matching.h" />
     <ClInclude Include="..\submodules\WGS84toCartesian\WGS84toCartesian.hpp" />
-    <ClInclude Include="Edge.h" />
-    <ClInclude Include="JSON.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="RouteFinder.h" />
     <ClInclude Include="Waypoint.h" />

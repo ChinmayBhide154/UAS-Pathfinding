@@ -6,21 +6,18 @@
 #include "Route.h"
 #include "RouteFinder.h"
 #include <string.h>
-#include "JSON.h"
 #include <fstream>
-#include <stdexcept>
-#include <map>
 #include "../submodules/json/single_include/nlohmann/json.hpp"
-
 using json = nlohmann::json;
 
-#define NUM_ROUTES 3
-#define NUM_WAYPOINTS 4
 int main()
 {
     std::cout << "program start\n";
     std::ifstream f("Text.json");
     json data = json::parse(f);
+
+    uint32_t NUM_ROUTES = data["numRoutes"];
+    uint32_t NUM_WAYPOINTS = data["numWaypoints"];
     std::vector<Waypoint *> listWaypoints{};
     std::cout << "start reading waypoint\n";
     for (uint32_t i = 0; i < NUM_WAYPOINTS; i++) {
@@ -65,5 +62,17 @@ int main()
         std::cout << result[i]->name << std::endl;
     }
     std::cout << "Size: " << result.size() << std::endl;
+
+
+    // Free memory
+    for (uint32_t i = 0; i < NUM_ROUTES; i++) {
+        delete (Route*)listRoutes.back();
+        listRoutes.pop_back();
+
+    }
+    for (uint32_t i = 0; i < NUM_WAYPOINTS; i++) {
+        delete listWaypoints.back();
+        listWaypoints.pop_back();
+    }
     return 0;
 }

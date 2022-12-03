@@ -1,4 +1,6 @@
 {
+	"numWaypoints": 4,
+	"numRoutes": 3,
 	"Waypoint0": {
 		"refLat": 22.0,
 		"refLong": 34.1,
