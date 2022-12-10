@@ -10,14 +10,13 @@ using namespace std;
 #include <stdio.h>
 #include <math.h>
 #define INFINITY 9999
-#define max 5
+#define max 8
 
 
 class Graph {
 
 	private:
 		vector<Waypoint*> waypoints;
-		vector<vector<double>> getGraphMatrix(vector<Waypoint*> obstacles, Waypoint* target);
 
 	public:
 		//constructors
@@ -25,8 +24,9 @@ class Graph {
 		Graph(std::vector<Waypoint*> waypoints); 
 
 		//functions
-		vector<int> reroute(int continueOn, vector<vector<int>> G, int n, int startnode, int destinationNode);
-		vector<int> dijkstra(vector<vector<int>> G, int n, int startnode, int destinationNode);
+		vector<vector<double>> getGraphMatrix(vector<Waypoint*> obstacles, double currentX, double currentY);
+		vector<int> reroute(int continueOn, vector<vector<double>> G, int n, int startnode, int destinationNode);
+		vector<int> dijkstra(vector<vector<double>> G, int n, int startnode, int destinationNode);
 };
 
 

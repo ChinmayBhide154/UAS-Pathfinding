@@ -8,25 +8,49 @@ Graph::Graph(std::vector<Waypoint*> waypoints) {
 
 Graph::Graph(){}
 
-vector<vector<double>> Graph::getGraphMatrix(vector<Waypoint*> obstacles, Waypoint* target) {
-    vector<vector<double>> matrix(max, vector<double>(5));
-    for (int i = 0; i < waypoints.size() - 1; i++) {
-        for (int j = 0; j < waypoints.size() - 1; j++) {
-            if (waypoints[j]->isObstructionN(obstacles, target)) {
+vector<vector<double>> Graph::getGraphMatrix(vector<Waypoint*> obstacles, double currentX, double currentY) {
+    Waypoint* currentLocation = new Waypoint();
+    currentLocation->x = currentX;
+    currentLocation->y = currentY;
+    this->waypoints.insert(this->waypoints.begin(), currentLocation);
+    bool destIsObstruction = false;
+    bool currentIsObstruction = false;
+
+    vector<vector<double>> matrix(max, vector<double>(max));
+    for (int i = 0; i < this->waypoints.size(); i++) {
+        for (int j = 0; j < this->waypoints.size(); j++) {
+            //if (std::find(obstacles.begin(), obstacles.end(), this->waypoints[i]) != obstacles.end() || 
+            //    std::find(obstacles.begin(), obstacles.end(), this->waypoints[j]) != obstacles.end()) {
+            //    destIsObstruction = true;
+            //}
+            if (std::find(obstacles.begin(), obstacles.end(), this->waypoints[i]) != obstacles.end()) {
+                currentIsObstruction = true;
+            }
+            if (std::find(obstacles.begin(), obstacles.end(), this->waypoints[j]) != obstacles.end()) {
+                destIsObstruction = true;
+            }
+
+            if (this->waypoints[j]->isObstructionN(obstacles, this->waypoints[i], destIsObstruction, currentIsObstruction, this->waypoints[i])) {
                 matrix[i][j] = INFINITY;
             }
             else {
-                matrix[i][j] = sqrt((waypoints[i]->x * waypoints[i]->x) + (waypoints[j]->y * waypoints[j]->y));
-                    cout << matrix[i][j] << " ";
+                double dx = this->waypoints[j]->x - this->waypoints[i]->x;
+                double dy = this->waypoints[j]->y - this->waypoints[i]->y;
+                matrix[i][j] = sqrt((dx * dx) + (dy * dy));
+                    //cout << matrix[i][j] << " ";
             }
 
+            std::cout << "matrix[" << i << "]" << "[" << j << "]" << "\n";
+
+            destIsObstruction = false;
+            currentIsObstruction = false;
         }
     }
 
     return matrix;
 }
 
-vector<int> Graph::dijkstra(vector<vector<int>> G, int n, int startnode, int destinationNode) {
+vector<int> Graph::dijkstra(vector<vector<double>> G, int n, int startnode, int destinationNode) {
     int cost[max][max], distance[max], pred[max];
     vector<int> shortestPath = {};
     int visited[max], count, mindistance, nextnode, i, j;
@@ -73,12 +97,13 @@ vector<int> Graph::dijkstra(vector<vector<int>> G, int n, int startnode, int des
 }
 
 
-vector<int> Graph::reroute(int continueOn, vector<vector<int>> G, int n, int startnode, int destinationNode) {
+vector<int> Graph::reroute(int continueOn, vector<vector<double>> G, int n, int startnode, int destinationNode) {
     vector<int> totalPath = {};
     vector<int> destinationPath = {};
 
     totalPath = dijkstra(G, n, startnode, continueOn);
     destinationPath = dijkstra(G, n, continueOn, destinationNode);
+    destinationPath.erase(destinationPath.begin());
     totalPath.insert(totalPath.end(), destinationPath.begin(), destinationPath.end());
     return totalPath;
 }
