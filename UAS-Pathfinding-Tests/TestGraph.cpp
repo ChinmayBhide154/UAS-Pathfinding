@@ -1,6 +1,6 @@
 #include "pch.h"
-#include "..\UAS-Pathfinding\Graph.h"
-//#include "..\UAS-Pathfinding\Graph.cpp"
+
+#include "..\UAS-Pathfinding\Graph.cpp"
 
 Waypoint w1;
 Waypoint w2;
@@ -16,6 +16,7 @@ TEST(GraphTests, projectConfigTest) {
 }
 
 TEST(GraphTests, reRouteTest) {
+
     w1.x = -5; w1.y = 2; w1.id = 0;
     w2.x = 1; w2.y = 1; w2.id = 1;
     w3.x = 5; w3.y = 10; w3.id = 2;
@@ -33,7 +34,9 @@ TEST(GraphTests, reRouteTest) {
     vector<int> shortestPath = {};
     //shortestPath = graph.dijkstra(matrix, 7, 0, 4);
     shortestPath = graph.reroute(3, matrix, 7, 0, 6);
+    vector<int> expectedShortestPath = { 1, 3, 7 };
 
-    //EXPECT_EQ(shortestPath, [0, 3, ]);
+    EXPECT_EQ(shortestPath, expectedShortestPath);
+
     EXPECT_TRUE(true);
 }
