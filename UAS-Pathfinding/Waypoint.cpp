@@ -1,12 +1,12 @@
 #include "Waypoint.h"
-#include "../submodules/WGS84toCartesian/WGS84toCartesian.hpp"
+#include "..\submodules\WGS84toCartesian\WGS84toCartesian.hpp"
 #include <array>
 #include <cmath>
 #include <vector>
 
 
 Waypoint::Waypoint(){}
-Waypoint::Waypoint(double xLat, double yLong, bool isGps, string name, double refLat, double refLong) : name(name) {
+Waypoint::Waypoint(double xLat, double yLong, bool isGps, string name, double refLat, double refLong, int id) : name(name), id(id) {
 	if (isGps) {
 		lat = xLat;
 		lon = yLong;
@@ -36,25 +36,64 @@ double Waypoint::distanceFrom(Waypoint* target) {
 	return sqrt(pow(target->x - this->x, 2) + pow(target->y - this->y, 2));
 }
 
-bool Waypoint::isObstructionN(vector<Waypoint*> waypoints, Waypoint* target) {
-	for (int i = 0; i < waypoints.size() - 1; i++) {
-		if (isObstruction2(waypoints[i], waypoints[i + 1], target)) {
-			return false;
+bool Waypoint::waypointsConnectedByBoundary(Waypoint* waypoint1, Waypoint* waypoint2, vector<Waypoint*> obstacles) {
+	for (int i = 0; i < obstacles.size() - 1; i++) {
+		if ((obstacles[i] == waypoint1 && obstacles[i + 1] == waypoint2) || (obstacles[i] == waypoint2 && obstacles[i + 1] == waypoint1)) {
+			return true;
 		}
 	}
-	return true;
+	return false;
+}
+bool Waypoint::isObstructionN(vector<Waypoint*> waypoints, Waypoint* target, bool targetIsObstructor, bool currentIsObstructor, Waypoint* currentWaypoint) {
+	//if going on an edge, then it is not an obstruction
+	//
+	
+	int numObstructions = 0;
+	int numObstructionsStandard = 0;
+
+	if (targetIsObstructor && !currentIsObstructor) {
+		numObstructionsStandard = 2;
+	}
+
+	else if (!targetIsObstructor && currentIsObstructor) {
+		numObstructionsStandard = 2;
+	}
+
+	else if (!targetIsObstructor && !currentIsObstructor) {
+		numObstructionsStandard = 0;
+	}
+	else {
+		numObstructionsStandard = 3;
+	}
+
+	
+
+	for (int i = 0; i < waypoints.size() - 1; i++) {
+		if (waypointsConnectedByBoundary(currentWaypoint, target, waypoints)) {
+			return false;
+		}
+		if (this->isObstruction2(waypoints[i], waypoints[i + 1], target)) {
+			numObstructions++;
+		}
+	}
+	std::cout << "Number of Obstructions " << numObstructions << "\n";
+	if (numObstructions > numObstructionsStandard) {
+		return true;
+	}
+	return false;
 }
 
 //isObstruciton determines if an obstacle created mid flight will cause a disruption in the Route.
 
 bool Waypoint::isObstruction2(Waypoint* waypoint1, Waypoint* waypoint2, Waypoint* target) {
+
 	int o1 = findOrientation(waypoint1, waypoint2, this);
 	int o2 = findOrientation(waypoint1, waypoint2, target);
 	int o3 = findOrientation(this, target, waypoint1);
 	int o4 = findOrientation(this, target, waypoint2);
 
-	if ((o1 != o2 && o3 != o4) || 
-		(o1 == 0 && onWaypointLineSegment(waypoint1, this, waypoint2)) || 
+	if ((o1 != o2 && o3 != o4) ||
+		(o1 == 0 && onWaypointLineSegment(waypoint1, this, waypoint2)) ||
 		(o2 == 0 && onWaypointLineSegment(waypoint1, target, waypoint2)) ||
 		(o3 == 0 && onWaypointLineSegment(this, waypoint1, target)) ||
 		(o4 == 0 && onWaypointLineSegment(this, waypoint2, target))) return true;

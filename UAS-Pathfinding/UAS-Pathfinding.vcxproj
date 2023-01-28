@@ -86,6 +86,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -100,6 +101,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -114,7 +116,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\submodules\json\single_include\nlohmann;$(SolutionDir)..\submodules\WGS84toCartesian\;D:\UAS\uas-pathfinding\submodules\Minimum-Cost-Perfect-Matching;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\submodules\json\single_include\nlohmann;$(SolutionDir)..\submodules\WGS84toCartesian\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,6 +132,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,7 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="JSON.cpp" />
+    <ClCompile Include="RouteRerouter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="RouteFinder.cpp" />
@@ -146,11 +150,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\submodules\json\single_include\nlohmann\json.hpp" />
-    <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\BinaryHeap.h" />
-    <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\Globals.h" />
-    <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\Graph.h" />
-    <ClInclude Include="..\submodules\Minimum-Cost-Perfect-Matching\Matching.h" />
     <ClInclude Include="..\submodules\WGS84toCartesian\WGS84toCartesian.hpp" />
+    <ClInclude Include="RouteRerouter.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="RouteFinder.h" />
     <ClInclude Include="Waypoint.h" />

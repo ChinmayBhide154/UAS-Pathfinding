@@ -8,9 +8,6 @@
     <ClCompile Include="TestEdge.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
-    <ClCompile Include="TestGraph.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
     <ClCompile Include="TestJSON.cpp">
       <Filter>Tests</Filter>
     </ClCompile>

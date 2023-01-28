@@ -9,26 +9,26 @@
 //#include "..\submodules\Minimum-Cost-Perfect-Matching\Matching.cpp"
 //#include "..\submodules\Minimum-Cost-Perfect-Matching\BinaryHeap.cpp"
 
-Waypoint wp0 = Waypoint::Waypoint(0, 10, false, "wp0", 49.269309, -123.242703);
-Waypoint wp1 = Waypoint::Waypoint(10, 10, false, "wp1", 49.269309, -123.242703);
-Waypoint wp2 = Waypoint::Waypoint(10, 0, false, "wp2", 49.269309, -123.242703);
-Waypoint wp3 = Waypoint::Waypoint(0, 0, false, "wp3", 49.269309, -123.242703);
-Waypoint wp4 = Waypoint::Waypoint(5, 5, false, "wp4", 49.269309, -123.242703);
-Waypoint wp10 = Waypoint::Waypoint(0, 20, false, "wp0", 49.269309, -123.242703);
-Waypoint wp11 = Waypoint::Waypoint(20, 20, false, "wp1", 49.269309, -123.242703);
-Waypoint wp12 = Waypoint::Waypoint(20, 0, false, "wp2", 49.269309, -123.242703);
-Waypoint wp13 = Waypoint::Waypoint(0, 0, false, "wp3", 49.269309, -123.242703);
-Waypoint wp14 = Waypoint::Waypoint(7, 7, false, "wp4", 49.269309, -123.242703);
-Waypoint wp20 = Waypoint::Waypoint(0, 17, false, "wp0", 49.269309, -123.242703);
-Waypoint wp21 = Waypoint::Waypoint(17, 17, false, "wp1", 49.269309, -123.242703);
-Waypoint wp22 = Waypoint::Waypoint(17, 0, false, "wp2", 49.269309, -123.242703);
-Waypoint wp23 = Waypoint::Waypoint(0, 0, false, "wp3", 49.269309, -123.242703);
-Waypoint wp24 = Waypoint::Waypoint(16, 4, false, "wp4", 49.269309, -123.242703);
-Waypoint wp30 = Waypoint::Waypoint(0, 27, false, "wp0", 49.269309, -123.242703);
-Waypoint wp31 = Waypoint::Waypoint(31, 19, false, "wp1", 49.269309, -123.242703);
-Waypoint wp32 = Waypoint::Waypoint(18, 0, false, "wp2", 49.269309, -123.242703);
-Waypoint wp33 = Waypoint::Waypoint(11, 10, false, "wp3", 49.269309, -123.242703);
-Waypoint wp34 = Waypoint::Waypoint(3, 2, false, "wp4", 49.269309, -123.242703);
+Waypoint wp0 = Waypoint::Waypoint(0, 10, false, "wp0", 49.269309, -123.242703, 0);
+Waypoint wp1 = Waypoint::Waypoint(10, 10, false, "wp1", 49.269309, -123.242703, 0);
+Waypoint wp2 = Waypoint::Waypoint(10, 0, false, "wp2", 49.269309, -123.242703, 0);
+Waypoint wp3 = Waypoint::Waypoint(0, 0, false, "wp3", 49.269309, -123.242703, 0);
+Waypoint wp4 = Waypoint::Waypoint(5, 5, false, "wp4", 49.269309, -123.242703, 0);
+Waypoint wp10 = Waypoint::Waypoint(0, 20, false, "wp0", 49.269309, -123.242703, 0);
+Waypoint wp11 = Waypoint::Waypoint(20, 20, false, "wp1", 49.269309, -123.242703, 0);
+Waypoint wp12 = Waypoint::Waypoint(20, 0, false, "wp2", 49.269309, -123.242703, 0);
+Waypoint wp13 = Waypoint::Waypoint(0, 0, false, "wp3", 49.269309, -123.242703, 0);
+Waypoint wp14 = Waypoint::Waypoint(7, 7, false, "wp4", 49.269309, -123.242703, 0);
+Waypoint wp20 = Waypoint::Waypoint(0, 17, false, "wp0", 49.269309, -123.242703, 0);
+Waypoint wp21 = Waypoint::Waypoint(17, 17, false, "wp1", 49.269309, -123.242703, 0);
+Waypoint wp22 = Waypoint::Waypoint(17, 0, false, "wp2", 49.269309, -123.242703, 0);
+Waypoint wp23 = Waypoint::Waypoint(0, 0, false, "wp3", 49.269309, -123.242703, 0);
+Waypoint wp24 = Waypoint::Waypoint(16, 4, false, "wp4", 49.269309, -123.242703, 0);
+Waypoint wp30 = Waypoint::Waypoint(0, 27, false, "wp0", 49.269309, -123.242703, 0);
+Waypoint wp31 = Waypoint::Waypoint(31, 19, false, "wp1", 49.269309, -123.242703, 0);
+Waypoint wp32 = Waypoint::Waypoint(18, 0, false, "wp2", 49.269309, -123.242703, 0);
+Waypoint wp33 = Waypoint::Waypoint(11, 10, false, "wp3", 49.269309, -123.242703, 0);
+Waypoint wp34 = Waypoint::Waypoint(3, 2, false, "wp4", 49.269309, -123.242703, 0);
 
 TEST(RouteFinderTests, projectConfigTest) {
 	std::vector<Waypoint*> test0{&wp4, &wp2, &wp3};
