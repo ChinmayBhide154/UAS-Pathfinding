@@ -70,14 +70,23 @@ TEST(RouteFinderTests, projectConfigTest) {
 	std::vector<Waypoint*> test14{&wp34, &wp0};
 	Route r13 = Route::Route(test14, "r2", 132.0);
 
-	std::vector<Route*> listRoutes{&r0, &r1, &r2};
+	std::vector<Route*> listRoutes{&r0, &r1, &r2, &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 , &r2 };
 	RouteFinder finder(listRoutes, &wp3, 12000);
-	std::vector<Route*> result = finder.findShortestTraversal();
-
+	std::cout << "Accurate ver:\n";
+	std::vector<Route*> result = finder.findShortestTraversalAccurate();
 	for (int i = 0; i < result.size(); i++) {
 		std::cout << result[i]->name << std::endl;
 	}
 	std::cout << "Size: " << result.size() << std::endl;
+
+
+	std::cout << "Naive-Fast ver:\n";
+	result = finder.findShortestTraversal();
+	for (int i = 0; i < result.size(); i++) {
+		std::cout << result[i]->name << std::endl;
+	}
+	std::cout << "Size: " << result.size() << std::endl;
+
 
 	ASSERT_TRUE(true);
 }

@@ -16,6 +16,9 @@ private:
 	Waypoint* startingPoint;
 	double maxDist;
 
+	double** memo;
+	std::vector<Route*>** memoRoutes;
+
 public:
 	// Constructors
 	RouteFinder(std::vector<Route*> routes, Waypoint* firstPoint, double maxDist);
@@ -24,7 +27,9 @@ public:
 	~RouteFinder();
 
 	// Functions
+	std::vector<Route*> findShortestTraversalAccurate();
 	std::vector<Route*> findShortestTraversal();
+	std::pair<uint32_t, uint32_t> accurateHelper(uint32_t i, uint32_t mask);
 
 private:
 	// non-poly time

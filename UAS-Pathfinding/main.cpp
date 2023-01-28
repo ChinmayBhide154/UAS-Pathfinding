@@ -18,10 +18,17 @@ int main()
 
     uint32_t NUM_ROUTES = data["numRoutes"];
     uint32_t NUM_WAYPOINTS = data["numWaypoints"];
+    uint32_t startPointIndex;
     std::vector<Waypoint *> listWaypoints{};
+    json routeFinder = data["RouteFinder"];
+
     std::cout << "start reading waypoint\n";
+    uint32_t startPointId = routeFinder["startingWaypointId"];
     for (uint32_t i = 0; i < NUM_WAYPOINTS; i++) {
         json waypoint = data[(std::string) ("Waypoint" + std::to_string(i))];
+        if (waypoint["waypointId"] == startPointId) {
+            startPointIndex = i;
+        }
         listWaypoints.push_back(new Waypoint(waypoint["refLat"], waypoint["refLong"], true, std::to_string((uint32_t) waypoint["waypointId"]), 0, 0));
     }
     std::cout<<"start reading routes\n";
@@ -36,9 +43,8 @@ int main()
     }
 
 
-    json routeFinder = data["RouteFinder"];
-    RouteFinder finder(listRoutes, listWaypoints[routeFinder["startingWaypointId"]], routeFinder["maxFlyingDistance"]);
-    std::vector<Route*> result = finder.findShortestTraversal();
+    RouteFinder finder(listRoutes, listWaypoints[startPointIndex], routeFinder["maxFlyingDistance"]);
+    std::vector<Route*> result = finder.findShortestTraversalAccurate();
 
     //serialize
     std::vector<int> routeIDs = {};

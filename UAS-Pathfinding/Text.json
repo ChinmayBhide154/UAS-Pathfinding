@@ -2,8 +2,8 @@
 	"numWaypoints": 4,
 	"numRoutes": 3,
 	"Waypoint0": {
-		"refLat": 22.0,
-		"refLong": 34.1,
+		"refLat": 10,
+		"refLong": 0,
 		"waypointId": 0
 	},
 
@@ -44,9 +44,9 @@
 	},
 
 	"RouteFinder": {
-		"routeIds": [ 1, 5, 2 ],
+		"routeIds": [ 1, 6, 2 ],
 		"maxFlyingDistance": 40.6,
-		"startingWaypointId": 1
+		"startingWaypointId": 2
 	},
 
 	"ReRouter": {

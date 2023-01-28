@@ -10,6 +10,7 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
+#include <utility>
 
 #define FLOAT_MAX 			3.402823465E38
 #define DOUBLE_MAX			1.7976931348623157E308
@@ -38,22 +39,37 @@ RouteFinder::RouteFinder(std::vector<Route*> routes, Waypoint* firstPoint, doubl
 
 		this->numNodes = routes.size();
 
-		// Adjacency Matrix: https://www.programiz.com/dsa/graph-adjacency-matrix
+		// Adjacency Matrix: https://www.programiz.com/dsa/graph-adjacency-matrix,
+		// and Dynammic Programming (DP) Memoization Matrix
 		adjMatrix = new double*[this->numNodes];
-		for (uint32_t i = 0; i < this->numNodes; i++) {
-			adjMatrix[i] = new double[this->numNodes];
-			for (uint32_t j = 0; j < this->numNodes; j++) {
-				if (i == j) adjMatrix[i][j] = -1;
-				else {
-					Waypoint* endOfFirst = routes[i]->waypoints[routes[i]->waypoints.size() - 1];
-					Waypoint* startOfNext = routes[j]->waypoints[0];
+		this->memo = new double*[this->numNodes + 1];
+		this->memoRoutes = new std::vector<Route*>*[this->numNodes + 1];
 
-					double distance = endOfFirst->distanceFrom(startOfNext);
-					if (distance >= this->maxDist) adjMatrix[i][j] = -1;
+		for (uint32_t i = 0; i < this->numNodes + 1; i++) {
+			this->memo[i] = new double[1 << (this->numNodes + 1)];
+			this->memoRoutes[i] = new std::vector<Route*>[1 << (this->numNodes + 1)];
+			for (uint32_t j = 0; j < 1 << (this->numNodes + 1); j++) {
+				this->memoRoutes[i][j] = std::vector<Route*>{};
+				this->memo[i][j] = 0;
+			}
+			
+			if (i < this->numNodes) {
+				adjMatrix[i] = new double[this->numNodes];
 
-					// Edge weight = total_dist / $ => smaller is better
-					adjMatrix[i][j] = (distance + routes[j]->getDistance()) / routes[j]->dollarValue;
-					// _ASSERT(adjMatrix[i][j] >= 0);
+				for (uint32_t j = 0; j < this->numNodes; j++) {
+					if (i == j) adjMatrix[i][j] = -1;
+					else {
+						Waypoint* endOfFirst = this->routes[i]->waypoints[this->routes[i]->waypoints.size() - 1];
+						Waypoint* startOfNext = this->routes[j]->waypoints[0];
+
+						double distance = endOfFirst->distanceFrom(startOfNext);
+						if (distance >= this->maxDist) adjMatrix[i][j] = -1;
+						else {
+							// Edge weight = total_dist / $ => smaller is better
+							adjMatrix[i][j] = (distance + this->routes[j]->getDistance()) / this->routes[j]->dollarValue;
+							// _ASSERT(adjMatrix[i][j] >= 0);
+						}
+					}
 				}
 			}
 		}
@@ -64,6 +80,66 @@ RouteFinder::~RouteFinder() {
 		delete[] adjMatrix[i];
 	}
 	delete[] adjMatrix;
+}
+
+
+/*
+* std::vector<Route*> RouteFinder::findShortestTraversalAccurate()
+*	- Returns: the optimal sequence of routes to take
+*/
+std::vector<Route*> RouteFinder::findShortestTraversalAccurate() {
+	std::vector<Route*> retArr = std::vector<Route*>();
+
+	std::pair<uint32_t, uint32_t> subAns, subTmp;
+	double min = DOUBLE_MAX, tmp;
+	
+	for (uint32_t i = 1; i <= this->numNodes; i++) {
+		subAns = accurateHelper(i, (1 << (this->numNodes + 1)) - 1);
+		tmp = this->memo[subAns.first][subAns.second] + this->adjMatrix[i - 1][0];
+
+		if (tmp < min) {
+			min = tmp;
+			subTmp = subAns;
+		}
+	}
+
+	retArr.insert(std::begin(retArr), std::begin(this->memoRoutes[subTmp.first][subTmp.second]), std::end(this->memoRoutes[subTmp.first][subTmp.second]));
+	return retArr;
+}
+
+std::pair<uint32_t, uint32_t> RouteFinder::accurateHelper(uint32_t i, uint32_t mask) {
+	// Base case
+	if (mask == ((1 << i) | 3)) {
+		this->memoRoutes[i][mask].push_back(this->routes[0]);
+		this->memoRoutes[i][mask].push_back(this->routes[i - 1]);
+		return std::pair<uint32_t, uint32_t>(i, mask);
+	}
+
+	// Return memo'd res if done
+	if (this->memo[i][mask] != 0) {
+		return std::pair<uint32_t, uint32_t>(i, mask);
+	}
+
+	// Solve subprob
+	std::pair<uint32_t, uint32_t> subAns, subTmp;
+	double min = DOUBLE_MAX, tmp;
+
+	for (uint32_t j = 1; j <= this->numNodes; j++) {
+		if ((mask & (1 << j)) && j != i && j != 1) {
+			subAns = accurateHelper(j, mask & (~(1 << i)));
+			tmp = this->memo[subAns.first][subAns.second] + this->adjMatrix[j - 1][i - 1];
+			
+			if (tmp < min) {
+				min = tmp;
+				subTmp = subAns;
+			}
+		}
+	}
+
+	this->memo[i][mask] = min;
+	this->memoRoutes[i][mask].insert(std::begin(this->memoRoutes[i][mask]), std::begin(this->memoRoutes[subTmp.first][subTmp.second]), std::end(this->memoRoutes[subTmp.first][subTmp.second]));
+	this->memoRoutes[i][mask].push_back(this->routes[i - 1]);
+	return std::pair<uint32_t, uint32_t>(i, mask);
 }
 
 /*
@@ -185,7 +261,7 @@ std::vector<Route*> RouteFinder::findShortestTraversal() {
 	return retArr;
 }
 
-// Dynamic Programming TSP (non-poly time) Helper
+// Naive-Fast TSP Helper
 void RouteFinder::minimumCost(uint32_t routeIndex, bool* visited, double* cost, std::vector<Route*>* retArr) {
 	uint32_t nIndex;
 	visited[routeIndex] = true;
@@ -202,10 +278,10 @@ void RouteFinder::minimumCost(uint32_t routeIndex, bool* visited, double* cost, 
 	minimumCost(nIndex, visited, cost, retArr);
 }
 
-// Dynamic Programming TSP (non-poly time) Second Helper
+// Naive-Fast TSP Second Helper
 uint32_t RouteFinder::closest(uint32_t routeIndex, bool* visited, double* cost) {
 	double minimum = DOUBLE_MAX;
-	double nc = UINT32_MAX;
+	uint32_t nc = UINT32_MAX;
 	double kmin;
 	
 	for (uint32_t i = 0; i < this->numNodes; i++) {
