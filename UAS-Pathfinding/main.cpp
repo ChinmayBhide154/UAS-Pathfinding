@@ -3,7 +3,7 @@
 */
 #include <iostream>
 #include "Waypoint.h"
-#include "Graph.h"
+#include "RouteRerouter.h"
 int main()
 {
     
@@ -25,7 +25,7 @@ int main()
     vector<Waypoint*> obstacles = { &w2, &w5, &w6, &w4, &w2 };
     
     int n = 5;
-    Graph graph = Graph(waypoints);
+    RouteRerouter graph = RouteRerouter(waypoints);
     vector<vector<double>> matrix;
     matrix = graph.getGraphMatrix(obstacles, -2, 1);
     vector<int> shortestPath = {};

@@ -1,14 +1,14 @@
-#include "Graph.h"
+#include "RouteRerouter.h"
 #include <iostream>
 
 
-Graph::Graph(std::vector<Waypoint*> waypoints) {
+RouteRerouter::RouteRerouter(std::vector<Waypoint*> waypoints) {
     this->waypoints = waypoints;
 }
 
-Graph::Graph(){}
+RouteRerouter::RouteRerouter(){}
 
-vector<vector<double>> Graph::getGraphMatrix(vector<Waypoint*> obstacles, double currentX, double currentY) {
+vector<vector<double>> RouteRerouter::getGraphMatrix(vector<Waypoint*> obstacles, double currentX, double currentY) {
     Waypoint* currentLocation = new Waypoint();
     currentLocation->x = currentX;
     currentLocation->y = currentY;
@@ -50,7 +50,7 @@ vector<vector<double>> Graph::getGraphMatrix(vector<Waypoint*> obstacles, double
     return matrix;
 }
 
-vector<int> Graph::dijkstra(vector<vector<double>> G, int n, int startnode, int destinationNode) {
+vector<int> RouteRerouter::dijkstra(vector<vector<double>> G, int n, int startnode, int destinationNode) {
     int cost[max][max], distance[max], pred[max];
     vector<int> shortestPath = {};
     int visited[max], count, mindistance, nextnode, i, j;
@@ -97,7 +97,7 @@ vector<int> Graph::dijkstra(vector<vector<double>> G, int n, int startnode, int 
 }
 
 
-vector<int> Graph::reroute(int continueOn, vector<vector<double>> G, int n, int startnode, int destinationNode) {
+vector<int> RouteRerouter::reroute(int continueOn, vector<vector<double>> G, int n, int startnode, int destinationNode) {
     vector<int> totalPath = {};
     vector<int> destinationPath = {};
 

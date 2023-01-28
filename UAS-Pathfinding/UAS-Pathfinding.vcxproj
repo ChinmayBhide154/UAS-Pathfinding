@@ -146,7 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Edge.cpp" />
-    <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="RouteRerouter.cpp" />
     <ClCompile Include="JSON.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Route.cpp" />
@@ -156,7 +156,7 @@
     <ClInclude Include="..\submodules\json\single_include\nlohmann\json.hpp" />
     <ClInclude Include="..\submodules\WGS84toCartesian\WGS84toCartesian.hpp" />
     <ClInclude Include="Edge.h" />
-    <ClInclude Include="Graph.h" />
+    <ClInclude Include="RouteRerouter.h" />
     <ClInclude Include="JSON.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="Waypoint.h" />

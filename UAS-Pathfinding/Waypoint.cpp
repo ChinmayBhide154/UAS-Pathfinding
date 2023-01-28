@@ -1,5 +1,5 @@
 #include "Waypoint.h"
-#include "../submodules/WGS84toCartesian/WGS84toCartesian.hpp"
+#include "..\submodules\WGS84toCartesian\WGS84toCartesian.hpp"
 #include <array>
 #include <cmath>
 #include <vector>

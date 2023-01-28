@@ -13,15 +13,15 @@ using namespace std;
 #define max 8
 
 
-class Graph {
+class RouteRerouter {
 
 	private:
 		vector<Waypoint*> waypoints;
 
 	public:
 		//constructors
-		Graph();
-		Graph(std::vector<Waypoint*> waypoints); 
+		RouteRerouter();
+		RouteRerouter(std::vector<Waypoint*> waypoints); 
 
 		//functions
 		vector<vector<double>> getGraphMatrix(vector<Waypoint*> obstacles, double currentX, double currentY);

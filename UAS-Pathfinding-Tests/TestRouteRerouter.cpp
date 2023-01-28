@@ -1,6 +1,6 @@
 #include "pch.h"
 
-#include "..\UAS-Pathfinding\Graph.cpp"
+#include "..\UAS-Pathfinding\RouteRerouter.cpp"
 
 Waypoint w1;
 Waypoint w2;
@@ -10,12 +10,12 @@ Waypoint w5;
 Waypoint w6;
 Waypoint w7;
 
-TEST(GraphTests, projectConfigTest) {
+TEST(RouteRerouterTests, projectConfigTest) {
 	EXPECT_EQ(1, 1);
 	EXPECT_TRUE(true);
 }
 
-TEST(GraphTests, reRouteTest) {
+TEST(RouteRerouterTests, reRouteTest) {
 
     w1.x = -5; w1.y = 2; w1.id = 0;
     w2.x = 1; w2.y = 1; w2.id = 1;
@@ -28,7 +28,7 @@ TEST(GraphTests, reRouteTest) {
     vector<Waypoint*> waypoints = { &w1, &w2, &w3, &w4, &w5, &w6, &w7 };
     vector<Waypoint*> obstacles = { &w2, &w5, &w6, &w4, &w2 };
 
-    Graph graph = Graph(waypoints);
+    RouteRerouter graph = RouteRerouter(waypoints);
     vector<vector<double>> matrix;
     matrix = graph.getGraphMatrix(obstacles, -2, 1);
     vector<int> shortestPath = {};
