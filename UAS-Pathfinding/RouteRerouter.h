@@ -1,5 +1,6 @@
 using namespace std;
 #include <vector>
+#include <algorithm>
 #include "Waypoint.h"
 #include "Route.h"
 #include <vector>

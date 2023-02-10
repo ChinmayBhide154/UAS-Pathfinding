@@ -92,7 +92,7 @@ vector<int> RouteRerouter::dijkstra(vector<vector<double>> G, int n, int startno
         shortestPath.push_back(j);
     } while (j != startnode);
 
-    reverse(shortestPath.begin(), shortestPath.end());
+    std::reverse(shortestPath.begin(), shortestPath.end());
     return shortestPath;
 }
 
