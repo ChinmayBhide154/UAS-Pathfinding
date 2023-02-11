@@ -78,6 +78,7 @@
     <ClCompile Include="..\UAS-Pathfinding\main.cpp" />
     <ClCompile Include="..\UAS-Pathfinding\Route.cpp" />
     <ClCompile Include="..\UAS-Pathfinding\RouteFinder.cpp" />
+    <ClCompile Include="..\UAS-Pathfinding\RouteRerouter.cpp" />
     <ClCompile Include="..\UAS-Pathfinding\Waypoint.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +86,7 @@
     <ClInclude Include="..\submodules\WGS84toCartesian\WGS84toCartesian.hpp" />
     <ClInclude Include="..\UAS-Pathfinding\Route.h" />
     <ClInclude Include="..\UAS-Pathfinding\RouteFinder.h" />
+    <ClInclude Include="..\UAS-Pathfinding\RouteRerouter.h" />
     <ClInclude Include="..\UAS-Pathfinding\Waypoint.h" />
   </ItemGroup>
   <ItemDefinitionGroup />

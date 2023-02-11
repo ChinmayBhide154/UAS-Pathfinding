@@ -24,6 +24,9 @@
     <ClCompile Include="..\UAS-Pathfinding\Waypoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\UAS-Pathfinding\RouteRerouter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\UAS-Pathfinding\Route.h">
@@ -40,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="..\submodules\json\single_include\nlohmann\json.hpp">
       <Filter>Header Files\Submodules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UAS-Pathfinding\RouteRerouter.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
