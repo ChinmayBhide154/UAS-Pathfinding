@@ -1,27 +1,172 @@
 {
 	"numWaypoints": 4,
 	"numRoutes": 3,
+
 	"Waypoint0": {
-		"refLat": 10,
-		"refLong": 0,
+		"refLat": -71.6375025,
+		"refLong": 48.5166707,
 		"waypointId": 0
 	},
 
 	"Waypoint1": {
-		"refLat": 0.0,
-		"refLong": 0.0,
+		"refLat": -71.6317518,
+		"refLong": 48.5060947,
 		"waypointId": 4
 	},
 
 	"Waypoint2": {
-		"refLat": 21.0,
-		"refLong": 34.0,
+		"refLat": -71.6340069,
+		"refLong": 48.4921159,
 		"waypointId": 3
 	},
 
 	"Waypoint3": {
-		"refLat": 2.0,
-		"refLong": 4.1,
+		"refLat": -71.6404442,
+		"refLong": 48.5150341,
+		"waypointId": 2
+	},
+
+	"Waypoint4": {
+		"refLat": -71.6782955,
+		"refLong": 48.5005337,
+		"waypointId": 4
+	},
+
+	"Waypoint5": {
+		"refLat": -71.6340069,
+		"refLong": 48.4921159,
+		"waypointId": 3
+	},
+
+	"Waypoint6": {
+		"refLat": -71.6040591,
+		"refLong": 48.5088395,
+		"waypointId": 2
+	},
+
+	"Waypoint7": {
+		"refLat": -71.6522101,
+		"refLong": 48.5101473,
+		"waypointId": 4
+	},
+
+	"Waypoint8": {
+		"refLat": -71.6426006,
+		"refLong": 48.5129917,
+		"waypointId": 3
+	},
+
+	"Waypoint9": {
+		"refLat": -71.6428152,
+		"refLong": 48.5117408,
+		"waypointId": 2
+	},
+
+	"Waypoint10": {
+		"refLat": -71.6229056,
+		"refLong": 48.5193311,
+		"waypointId": 4
+	},
+
+	"Waypoint11": {
+		"refLat": -71.6568088,
+		"refLong": 48.4984623,
+		"waypointId": 3
+	},
+
+	"Waypoint12": {
+		"refLat": -71.6253089,
+		"refLong": 48.5019885,
+		"waypointId": 2
+	},
+
+	"Waypoint13": {
+		"refLat": -71.6720008,
+		"refLong": 48.520525,
+		"waypointId": 0
+	},
+
+	"Waypoint14": {
+		"refLat": -71.6461702,
+		"refLong": 48.5090567,
+		"waypointId": 4
+	},
+
+	"Waypoint15": {
+		"refLat": -71.6516848,
+		"refLong": 48.5107057,
+		"waypointId": 3
+	},
+
+	"Waypoint16": {
+		"refLat": -71.6298198,
+		"refLong": 48.5039667,
+		"waypointId": 2
+	},
+
+	"Waypoint17": {
+		"refLat": -71.6345802,
+		"refLong": 48.5262308,
+		"waypointId": 4
+	},
+
+	"Waypoint18": {
+		"refLat": -71.6804996,
+		"refLong": 48.511563,
+		"waypointId": 3
+	},
+
+	"Waypoint19": {
+		"refLat": -71.6425625,
+		"refLong": 48.4984266,
+		"waypointId": 2
+	},
+
+	"Waypoint20": {
+		"refLat": -71.6320911,
+		"refLong": 48.5258329,
+		"waypointId": 4
+	},
+
+	"Waypoint21": {
+		"refLat": -71.6758648,
+		"refLong": 48.4996779,
+		"waypointId": 3
+	},
+
+	"Waypoint22": {
+		"refLat": -71.6290012,
+		"refLong": 48.4937058,
+		"waypointId": 2
+	},
+
+	"Waypoint23": {
+		"refLat": -71.6228085,
+		"refLong": 48.510353,
+		"waypointId": 4
+	},
+
+	"Waypoint24": {
+		"refLat": -71.6216069,
+		"refLong": 48.5093153,
+		"waypointId": 3
+	},
+
+	"Waypoint25": {
+		"refLat": -71.6034018,
+		"refLong": 48.4969248,
+		"waypointId": 2
+	},
+
+	"Waypoint26": {
+		"refLat": -71.6312968,
+		"refLong": 48.5112557,
+		"waypointId": 3
+	},
+
+	"Waypoint27": {
+		"refLat": -71.6664874,
+		"refLong": 48.4932846,
 		"waypointId": 2
 	},
 
