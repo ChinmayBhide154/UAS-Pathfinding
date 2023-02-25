@@ -42,6 +42,7 @@ private:
 	void extractSubgraph(uint32_t* numNodes, uint32_t* numEdges, bool* subNodes, double** result);
 	void findMinWeightPerfectMatching(uint32_t* numNodes, uint32_t* numEdges, bool* subNodes, double** subGraph, double** result);
 	void findEulerTour(bool* subNodes, double** subGraph, vector<Route*>* result);*/
+	std::vector<Route*> truncateRoute(std::vector<Route*> routeToTruncate);
 
 	// Function to port to library
 

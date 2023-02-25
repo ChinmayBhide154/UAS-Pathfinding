@@ -46,8 +46,8 @@ RouteFinder::RouteFinder(std::vector<Route*> routes, Waypoint* firstPoint, doubl
 		this->memoRoutes = new std::vector<Route*>*[this->numNodes + 1];
 
 		for (uint32_t i = 0; i < this->numNodes + 1; i++) {
-			this->memo[i] = new double[1 << (this->numNodes + 1)];
-			this->memoRoutes[i] = new std::vector<Route*>[1 << (this->numNodes + 1)];
+			this->memo[i] = new double[1 << (uint32_t) (this->numNodes + 1)];
+			this->memoRoutes[i] = new std::vector<Route*>[1 << (uint32_t) (this->numNodes + 1)];
 			for (uint32_t j = 0; j < 1 << (this->numNodes + 1); j++) {
 				this->memoRoutes[i][j] = std::vector<Route*>{};
 				this->memo[i][j] = 0;
@@ -82,6 +82,29 @@ RouteFinder::~RouteFinder() {
 	delete[] adjMatrix;
 }
 
+std::vector<Route*> RouteFinder::truncateRoute(std::vector<Route*> routeToTruncate) {
+	std::vector<Route*> retArr = std::vector<Route*>();
+
+	// Get working first, first subset probably best
+	double distance = this->distToStartingRoute;
+	uint32_t iter = 0;
+	while (distance < this->maxDist && iter < routeToTruncate.size()) {
+		// Check if we can return to start point from this
+		double distFromPrevRoute = 0;
+		double distBackToStart = routeToTruncate[iter]->waypoints[routeToTruncate[iter]->waypoints.size() - 1]->distanceFrom(this->startingPoint);
+		if (retArr.size() != 0) {
+			distFromPrevRoute = retArr[retArr.size() - 1]->waypoints[retArr[retArr.size() - 1]->waypoints.size() - 1]->distanceFrom(routeToTruncate[iter]->waypoints[0]);
+		}
+		if (distFromPrevRoute + distance + distBackToStart > this->maxDist) {
+			break;
+		}
+		distance += distFromPrevRoute + routeToTruncate[iter]->getDistance();
+		retArr.push_back(routeToTruncate[iter]);
+		iter++;
+	}
+	return retArr;
+}
+
 
 /*
 * std::vector<Route*> RouteFinder::findShortestTraversalAccurate()
@@ -104,7 +127,7 @@ std::vector<Route*> RouteFinder::findShortestTraversalAccurate() {
 	}
 
 	retArr.insert(std::begin(retArr), std::begin(this->memoRoutes[subTmp.first][subTmp.second]), std::end(this->memoRoutes[subTmp.first][subTmp.second]));
-	return retArr;
+	return truncateRoute(retArr);
 }
 
 std::pair<uint32_t, uint32_t> RouteFinder::accurateHelper(uint32_t i, uint32_t mask) {
@@ -147,14 +170,15 @@ std::pair<uint32_t, uint32_t> RouteFinder::accurateHelper(uint32_t i, uint32_t m
 *	- Returns: the optimal sequence of routes to take
 */
 std::vector<Route*> RouteFinder::findShortestTraversal() {
+	std::vector<Route*> result = std::vector<Route*>();
 	std::vector<Route*> retArr = std::vector<Route*>();
 
 
 	bool* visited = new bool[this->numNodes];
 	memset(visited, false, sizeof(bool) * this->numNodes);
 	double cost = 0;
-	minimumCost(0, visited, &cost, &retArr);
-	retArr.pop_back();
+	minimumCost(0, visited, &cost, &result);
+	result.pop_back();
 
 
 
@@ -222,24 +246,6 @@ std::vector<Route*> RouteFinder::findShortestTraversal() {
 	// TODO: Get subset of routes that won't exceed travel distance, reject if < 50% routes traversed
 	// DEBUG: Must include the "first" Route stored in this->routes AND account for time to return to it at the end!
 
-	// // Get working first, first subset probably best
-	// double distance = this->distToStartingRoute;
-	// uint32_t iter = 0;
-	// while (distance < this->maxDist && iter < eulerTour->size()) {
-	// 	// Check if we can return to start point from this
-	// 	double distFromPrevRoute = 0;
-	// 	double distBackToStart = (*eulerTour)[iter]->waypoints[(*eulerTour)[iter]->waypoints.size() - 1]->distanceFrom(this->startingPoint);
-	// 	if (retArr.size() != 0) {
-	// 		distFromPrevRoute = retArr[retArr.size() - 1]->waypoints[retArr[retArr.size() - 1]->waypoints.size() - 1]->distanceFrom((*eulerTour)[iter]->waypoints[0]);
-	// 	}
-	// 	if (distFromPrevRoute + distance + distBackToStart > this->maxDist) {
-	// 		break;
-	// 	}
-	// 	distance += distFromPrevRoute + (*eulerTour)[iter]->getDistance();
-	// 	retArr.push_back((*eulerTour)[iter]);
-	// 	iter++;
-	// }
-
 	// // Stretch TODO: Get route with greatest value out of the subset
 
 
@@ -257,8 +263,7 @@ std::vector<Route*> RouteFinder::findShortestTraversal() {
 	// delete[] mstOddDegreeNodes;
 
 	// delete eulerTour;
-	
-	return retArr;
+	return truncateRoute(result);
 }
 
 // Naive-Fast TSP Helper

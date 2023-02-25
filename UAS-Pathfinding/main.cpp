@@ -46,7 +46,13 @@ int main()
 
 
     RouteFinder finder(listRoutes, listWaypoints[startPointIndex], routeFinder["maxFlyingDistance"]);
-    std::vector<Route*> result = finder.findShortestTraversalAccurate();
+    std::vector<Route*> result;
+    if (NUM_ROUTES > 19) {
+        result = finder.findShortestTraversalAccurate();
+    }
+    else {
+        result = finder.findShortestTraversal();
+    }
 
     //serialize
     std::vector<int> routeIDs = {};
