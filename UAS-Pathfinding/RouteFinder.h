@@ -21,7 +21,7 @@ private:
 
 public:
 	// Constructors
-	RouteFinder(std::vector<Route*> routes, Waypoint* firstPoint, double maxDist);
+	RouteFinder(std::vector<Route*> routes, Waypoint* firstPoint, double maxDist, bool fast);
 
 	// Destructors
 	~RouteFinder();

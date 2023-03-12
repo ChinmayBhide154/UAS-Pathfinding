@@ -45,12 +45,13 @@ int main()
     }
 
 
-    RouteFinder finder(listRoutes, listWaypoints[startPointIndex], routeFinder["maxFlyingDistance"]);
     std::vector<Route*> result;
-    if (NUM_ROUTES > 19) {
+    if (NUM_ROUTES < 19) {
+        RouteFinder finder(listRoutes, listWaypoints[startPointIndex], routeFinder["maxFlyingDistance"], false);
         result = finder.findShortestTraversalAccurate();
     }
     else {
+        RouteFinder finder(listRoutes, listWaypoints[startPointIndex], routeFinder["maxFlyingDistance"], true);
         result = finder.findShortestTraversal();
     }
 
