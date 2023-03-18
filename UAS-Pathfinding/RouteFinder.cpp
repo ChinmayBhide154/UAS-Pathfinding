@@ -48,7 +48,7 @@ RouteFinder::RouteFinder(std::vector<Route*> routes, Waypoint* firstPoint, doubl
 		for (uint32_t i = 0; i < this->numNodes + 1; i++) {
 			this->memo[i] = new double[1 << (uint32_t) (this->numNodes + 1)];
 			this->memoRoutes[i] = new std::vector<Route*>[1 << (uint32_t) (this->numNodes + 1)];
-			for (uint32_t j = 0; j < 1 << (this->numNodes + 1); j++) {
+			for (uint32_t j = 0; j < (1 << (this->numNodes + 1)); j++) {
 				this->memoRoutes[i][j] = std::vector<Route*>{};
 				this->memo[i][j] = 0;
 			}
@@ -127,7 +127,8 @@ std::vector<Route*> RouteFinder::findShortestTraversalAccurate() {
 	}
 
 	retArr.insert(std::begin(retArr), std::begin(this->memoRoutes[subTmp.first][subTmp.second]), std::end(this->memoRoutes[subTmp.first][subTmp.second]));
-	return truncateRoute(retArr);
+	//return truncateRoute(retArr);
+	return retArr;
 }
 
 std::pair<uint32_t, uint32_t> RouteFinder::accurateHelper(uint32_t i, uint32_t mask) {
