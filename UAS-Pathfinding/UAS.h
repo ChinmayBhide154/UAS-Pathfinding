@@ -12,10 +12,12 @@ class UAS
 		double flightTime;
 		double altitude;
 		double climbRate;
+		double horizontalDistance;
 		uint32_t numWaypoints;
 
-	UAS();
-	double getTotalDistance();
+		UAS();
+		UAS(double speed, double altitude, double climbRate, double horizontalDistance);
+		double getTotalDistance();
 
 
 };
