@@ -12,8 +12,26 @@ using json = nlohmann::json;
 
 #include "Waypoint.h"
 #include "RouteRerouter.h"
+
+
+std::vector<Waypoint*> extractWaypointsFromIds(std::vector<int> ids, std::vector<Waypoint*> waypoints) {
+    std::vector<Waypoint*> retList = {};
+
+    for (int id : ids) {
+        for (Waypoint* waypoint : waypoints) {
+            if (waypoint->id == id) {
+                retList.push_back(waypoint);
+            }
+        }
+    }
+    return retList;
+}
+
+
 int main()
 {
+    bool isMidFlight = false;
+
     std::cout << "program start\n";
     std::ifstream f("Text.json");
     json data = json::parse(f);
@@ -21,8 +39,8 @@ int main()
     uint32_t NUM_ROUTES = data["numRoutes"];
     uint32_t NUM_WAYPOINTS = data["numWaypoints"];
     uint32_t startPointIndex;
-    
-    std::vector<Waypoint *> listWaypoints{};
+
+    std::vector<Waypoint*> listWaypoints{};
     json routeFinder = data["RouteFinder"];
 
     double maxFlyingDistance = routeFinder["maxFlyingDistance"];
@@ -36,101 +54,105 @@ int main()
         if (waypoint["id"] == startPointId) {
             startPointIndex = i;
         }
-        listWaypoints.push_back(new Waypoint(waypoint["latitude"], waypoint["longitude"], true, std::to_string((uint32_t) waypoint["id"]), 0, 0, 0));
-    }
-    std::cout<<"start reading routes\n";
-    std::vector<Route*> listRoutes{};
-    json routes = data["routes"];
-    for (uint32_t i = 0; i < NUM_ROUTES; i++) {
-        json route = routes[i];
-        std::vector<Waypoint*> waypointsInRoute;
-        for (auto it = route["waypointIds"].begin(); it != route["waypointIds"].end(); ++it) {
-            waypointsInRoute.push_back(listWaypoints[(uint32_t) it.value()]);
-        }
-        listRoutes.push_back(new Route(waypointsInRoute, std::to_string((uint32_t) route["routeID"]), route["dollarValue"]));
+        listWaypoints.push_back(new Waypoint(waypoint["latitude"], waypoint["longitude"], true, std::to_string((uint32_t)waypoint["id"]), 0, 0, waypoint["id"]));
     }
 
-    std::vector<Route*> result;
-    if (NUM_ROUTES < 19) {
-        RouteFinder finder(listRoutes, listWaypoints[startPointIndex], routeFinder["maxFlyingDistance"], false);
-        result = finder.findShortestTraversalAccurate();
+    if (!isMidFlight) {
+
+        
+        std::cout << "start reading routes\n";
+        std::vector<Route*> listRoutes{};
+        json routes = data["routes"];
+        for (uint32_t i = 0; i < NUM_ROUTES; i++) {
+            json route = routes[i];
+            std::vector<Waypoint*> waypointsInRoute;
+            for (auto it = route["waypointIds"].begin(); it != route["waypointIds"].end(); ++it) {
+                waypointsInRoute.push_back(listWaypoints[(uint32_t)it.value()]);
+            }
+            listRoutes.push_back(new Route(waypointsInRoute, std::to_string((uint32_t)route["routeID"]), route["dollarValue"]));
+        }
+
+        std::vector<Route*> result;
+        if (NUM_ROUTES < 19) {
+            RouteFinder finder(listRoutes, listWaypoints[startPointIndex], routeFinder["maxFlyingDistance"], false);
+            result = finder.findShortestTraversalAccurate();
+        }
+        else {
+            RouteFinder finder(listRoutes, listWaypoints[startPointIndex], routeFinder["maxFlyingDistance"], true);
+            result = finder.findShortestTraversal();
+        }
+
+        //serialize
+        std::vector<int> routeIDs = {};
+
+        for (int i = 0; i < result.size(); i++) {
+            routeIDs.push_back(std::stoi(result[i]->name));
+        }
+
+        json serializeRouteFinder = {
+            {"Routes", routeIDs}
+        };
+
+        std::ofstream output("output.json");
+        output << serializeRouteFinder;
+
+        output.close();
+
+
+        // Temp: Print pathfinding results
+        for (int i = 0; i < result.size(); i++) {
+            std::cout << result[i]->name << std::endl;
+        }
+        std::cout << "Size: " << result.size() << std::endl;
+
+        // Free memory
+        for (uint32_t i = 0; i < NUM_ROUTES; i++) {
+            delete (Route*)listRoutes.back();
+            listRoutes.pop_back();
+
+        }
+        for (uint32_t i = 0; i < NUM_WAYPOINTS; i++) {
+            delete listWaypoints.back();
+            listWaypoints.pop_back();
+        }
     }
     else {
-        RouteFinder finder(listRoutes, listWaypoints[startPointIndex], routeFinder["maxFlyingDistance"], true);
-        result = finder.findShortestTraversal();
-    }
 
-    //serialize
-    std::vector<int> routeIDs = {};
+        /*
+            Rerouter:
+        */
 
-    for (int i = 0; i < result.size(); i++) {
-        routeIDs.push_back(std::stoi(result[i]->name));
-    }
+        //JSON parsing for Rerouter module:
+        json reRouter = data["ReRouter"];
 
-    json serializeRouteFinder = {
-        {"Routes", routeIDs}
-    };
+        double currentLong = reRouter["currentLong"];
+        double currentLat = reRouter["currentLat"];
+        int intermediateWaypoint = reRouter["reRouteWaypointId"];
+        int destinationWaypointId = reRouter["reRouteWaypointId"];
 
-    std::ofstream output("output.json");
-    output << serializeRouteFinder;
+        //Logic
 
-    output.close();
+        RouteRerouter routeReRouter(listWaypoints);
+        cout << listWaypoints.size() << endl;
+        Waypoint* currentLocation = new Waypoint(0, 0, false, "currentLocation", currentLat, currentLong, 100);
+        listWaypoints.push_back(currentLocation);
+        std::vector<std::vector<double>> matrix;
+        std::vector<int> waypointObstacleIds = {};
+        std::vector<Waypoint*> waypointObstacles = {};
+        vector<int> shortestPath = {};
 
 
-    // Temp: Print pathfinding results
-    for (int i = 0; i < result.size(); i++) {
-        std::cout << result[i]->name << std::endl;
-    }
-    std::cout << "Size: " << result.size() << std::endl;
+        for (auto it = reRouter["waypointObstacleIds"].begin(); it != reRouter["waypointObstacleIds"].end(); ++it) {
+            waypointObstacleIds.push_back(it.value());
+        }
 
-    //
-    //Waypoint w1;
-    //Waypoint w2;
-    //Waypoint w3;
-    //Waypoint w4;
-    //Waypoint w5;
-    //Waypoint w6;
-    //Waypoint w7;
-    //w1.x = -5; w1.y = 2; w1.id = 0;
-    //w2.x = 1; w2.y = 1; w2.id = 1;
-    //w3.x = 5; w3.y = 10; w3.id = 2;
-    //w4.x = -1; w4.y = -2; w4.id = 3;
-    //w5.x = 3; w5.y = -3; w5.id = 4;
-    //w6.x = -3; w6.y = -6; w6.id = 5;
-    //w7.x = 4; w7.y = -13; w7.id = 6;
-    //vector<Waypoint*> waypoints = {&w1, &w2, &w3, &w4, &w5, &w6, &w7};
-    //vector<Waypoint*> obstacles = { &w2, &w5, &w6, &w4, &w2 };
-    //
-    //int n = 5;
-    //RouteRerouter graph = RouteRerouter(waypoints);
-    //vector<vector<double>> matrix;
-    //matrix = graph.getGraphMatrix(obstacles, -2, 1);
-    //vector<int> shortestPath = {};
-    ////shortestPath = graph.dijkstra(matrix, 7, 0, 4);
-    //shortestPath = graph.reroute(5, matrix, 8, 0, 6);
-    ///*
-    //vector<vector<int>> G = { {0,1,0,3,10},{1,0,5,0,0},{0,5,0,2,1},{3,0,2,0,6},{10,0,1,6,0}};
-    //int n = 5;
-    //int u = 0;
-    //Graph graph = Graph();
-    //vector<int> shortestPath = {};
-    //shortestPath = graph.dijkstra(G, n, u, 3);
-    //*/
-    //for (int i = 0; i < shortestPath.size(); i++)
-    //    std::cout << shortestPath.at(i) << ' ';
-    //
-    //
-    //return 0;
+        waypointObstacles = extractWaypointsFromIds(waypointObstacleIds, listWaypoints);
 
-    // Free memory
-    for (uint32_t i = 0; i < NUM_ROUTES; i++) {
-        delete (Route*)listRoutes.back();
-        listRoutes.pop_back();
+        matrix = routeReRouter.getGraphMatrix(waypointObstacles, currentLocation->x, currentLocation->y);
+        shortestPath = routeReRouter.reroute(intermediateWaypoint, matrix, NUM_WAYPOINTS, currentLocation->id, destinationWaypointId);
 
-    }
-    for (uint32_t i = 0; i < NUM_WAYPOINTS; i++) {
-        delete listWaypoints.back();
-        listWaypoints.pop_back();
+        for (int i = 0; i < shortestPath.size(); i++)
+            std::cout << shortestPath.at(i) << ' ';
     }
     return 0;
 }

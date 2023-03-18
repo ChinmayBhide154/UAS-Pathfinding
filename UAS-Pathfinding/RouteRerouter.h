@@ -10,7 +10,7 @@ using namespace std;
 #include <stdio.h>
 #include <math.h>
 #define INFINITY 9999
-#define max 8
+#define max 29
 
 
 class RouteRerouter {

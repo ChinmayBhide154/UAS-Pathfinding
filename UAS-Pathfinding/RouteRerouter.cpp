@@ -8,7 +8,7 @@ RouteRerouter::RouteRerouter(std::vector<Waypoint*> waypoints) {
 
 RouteRerouter::RouteRerouter(){}
 
-vector<vector<double>> RouteRerouter::getGraphMatrix(vector<Waypoint*> obstacles, double currentX, double currentY) {
+std::vector<vector<double>> RouteRerouter::getGraphMatrix(std::vector<Waypoint*> obstacles, double currentX, double currentY) {
     Waypoint* currentLocation = new Waypoint();
     currentLocation->x = currentX;
     currentLocation->y = currentY;
