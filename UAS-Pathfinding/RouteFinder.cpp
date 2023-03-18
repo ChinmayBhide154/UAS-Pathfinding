@@ -17,7 +17,7 @@
 #define UINT32_MAX  		4294967295
 #define INT_DOUBLE_ACCURACY 1E12
 
-RouteFinder::RouteFinder(std::vector<Route*> routes, Waypoint* firstPoint, double maxDist)
+RouteFinder::RouteFinder(std::vector<Route*> routes, Waypoint* firstPoint, double maxDist, bool fast)
 	: routes(routes), maxDist(maxDist) {
 		// Find route closest to the first point, use that as first node of traversal
 		double distToStartingRoute = FLOAT_MAX;
@@ -42,15 +42,20 @@ RouteFinder::RouteFinder(std::vector<Route*> routes, Waypoint* firstPoint, doubl
 		// Adjacency Matrix: https://www.programiz.com/dsa/graph-adjacency-matrix,
 		// and Dynammic Programming (DP) Memoization Matrix
 		adjMatrix = new double*[this->numNodes];
-		this->memo = new double*[this->numNodes + 1];
-		this->memoRoutes = new std::vector<Route*>*[this->numNodes + 1];
+
+		if (!fast) {
+			this->memo = new double* [this->numNodes + 1];
+			this->memoRoutes = new std::vector<Route*>*[this->numNodes + 1];
+		}
 
 		for (uint32_t i = 0; i < this->numNodes + 1; i++) {
-			this->memo[i] = new double[1 << (uint32_t) (this->numNodes + 1)];
-			this->memoRoutes[i] = new std::vector<Route*>[1 << (uint32_t) (this->numNodes + 1)];
-			for (uint32_t j = 0; j < (1 << (this->numNodes + 1)); j++) {
-				this->memoRoutes[i][j] = std::vector<Route*>{};
-				this->memo[i][j] = 0;
+			if (!fast) {
+				this->memo[i] = new double[1 << (uint32_t)(this->numNodes + 1)];
+				this->memoRoutes[i] = new std::vector<Route*>[1 << (uint32_t)(this->numNodes + 1)];
+				for (uint32_t j = 0; j < 1 << (this->numNodes + 1); j++) {
+					this->memoRoutes[i][j] = std::vector<Route*>{};
+					this->memo[i][j] = 0;
+				}
 			}
 			
 			if (i < this->numNodes) {
@@ -264,7 +269,8 @@ std::vector<Route*> RouteFinder::findShortestTraversal() {
 	// delete[] mstOddDegreeNodes;
 
 	// delete eulerTour;
-	return truncateRoute(result);
+	//return truncateRoute(result);
+	return result;
 }
 
 // Naive-Fast TSP Helper

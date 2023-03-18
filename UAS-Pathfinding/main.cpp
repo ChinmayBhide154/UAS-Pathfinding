@@ -50,15 +50,13 @@ int main()
         listRoutes.push_back(new Route(waypointsInRoute, std::to_string((uint32_t) route["routeID"]), route["dollarValue"]));
     }
 
-    std::cout << "Before Constructor" << std::endl;
-
-    RouteFinder finder(listRoutes, listWaypoints[startPointIndex], maxFlyingDistance);
-    std::cout << "After Constructor" << std::endl;
     std::vector<Route*> result;
     if (NUM_ROUTES < 19) {
+        RouteFinder finder(listRoutes, listWaypoints[startPointIndex], routeFinder["maxFlyingDistance"], false);
         result = finder.findShortestTraversalAccurate();
     }
     else {
+        RouteFinder finder(listRoutes, listWaypoints[startPointIndex], routeFinder["maxFlyingDistance"], true);
         result = finder.findShortestTraversal();
     }
 
@@ -67,7 +65,6 @@ int main()
 
     for (int i = 0; i < result.size(); i++) {
         routeIDs.push_back(std::stoi(result[i]->name));
-        std::cout << result[i]->name << std::endl;
     }
 
     json serializeRouteFinder = {
