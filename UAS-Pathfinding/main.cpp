@@ -7,6 +7,7 @@
 #include "RouteFinder.h"
 #include <string.h>
 #include <fstream>
+#include "UAS.h"
 #include "../submodules/json/single_include/nlohmann/json.hpp"
 using json = nlohmann::json;
 
@@ -30,7 +31,7 @@ std::vector<Waypoint*> extractWaypointsFromIds(std::vector<int> ids, std::vector
 
 int main()
 {
-    bool isMidFlight = false;
+    bool isMidFlight = true;
 
     std::cout << "program start\n";
     std::ifstream f("Text.json");
@@ -43,10 +44,16 @@ int main()
     std::vector<Waypoint*> listWaypoints{};
     json routeFinder = data["RouteFinder"];
 
-    double maxFlyingDistance = routeFinder["maxFlyingDistance"];
+    double uasSpeed = routeFinder["speed"];
+    double uasAltitude = routeFinder["altitude"];
+    double uasClimbRate = routeFinder["climbRate"];
+    //double maxFlyingDistance = routeFinder["maxFlyingDistance"];
 
     std::cout << "start reading waypoint\n";
     uint32_t startPointId = routeFinder["startingWaypointId"];
+
+    //UAS uas(uasSpeed, uasAltitude, uasClimbRate, 4.6);
+
     json waypoints = data["waypoints"];
     for (uint32_t i = 0; i < NUM_WAYPOINTS; i++) {
         //json waypoint = data[(std::string) ("Waypoint" + std::to_string(i))];
@@ -71,14 +78,17 @@ int main()
             }
             listRoutes.push_back(new Route(waypointsInRoute, std::to_string((uint32_t)route["routeID"]), route["dollarValue"]));
         }
+        
+        UAS uas(uasSpeed, uasAltitude, uasClimbRate, listRoutes, 4.6);
+        double maxFlyingDistance = uas.getTotalDistance();
 
         std::vector<Route*> result;
         if (NUM_ROUTES < 19) {
-            RouteFinder finder(listRoutes, listWaypoints[startPointIndex], routeFinder["maxFlyingDistance"], false);
+            RouteFinder finder(listRoutes, listWaypoints[startPointIndex], maxFlyingDistance, false);
             result = finder.findShortestTraversalAccurate();
         }
         else {
-            RouteFinder finder(listRoutes, listWaypoints[startPointIndex], routeFinder["maxFlyingDistance"], true);
+            RouteFinder finder(listRoutes, listWaypoints[startPointIndex], maxFlyingDistance, true);
             result = finder.findShortestTraversal();
         }
 

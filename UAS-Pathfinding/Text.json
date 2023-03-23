@@ -416,7 +416,9 @@
 		}
 	],
 	"RouteFinder": {
-		"maxFlyingDistance": 40.6,
+		"speed": 16.1,
+		"altitude": 4.65,
+		"climbRate": 5.6,
 		"startingWaypointId": 2
 	},
 	"ReRouter": {
