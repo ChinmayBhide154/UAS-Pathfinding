@@ -16,6 +16,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UAS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Route.h">
@@ -35,6 +38,9 @@
     </ClInclude>
     <ClInclude Include="..\submodules\WGS84toCartesian\WGS84toCartesian.hpp">
       <Filter>Header Files\Submodules</Filter>
+    </ClInclude>
+    <ClInclude Include="UAS.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

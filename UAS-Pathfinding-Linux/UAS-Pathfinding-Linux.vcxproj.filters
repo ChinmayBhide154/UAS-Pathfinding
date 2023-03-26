@@ -27,6 +27,9 @@
     <ClCompile Include="..\UAS-Pathfinding\RouteRerouter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\UAS-Pathfinding\UAS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\UAS-Pathfinding\Route.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files\Submodules</Filter>
     </ClInclude>
     <ClInclude Include="..\UAS-Pathfinding\RouteRerouter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UAS-Pathfinding\UAS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

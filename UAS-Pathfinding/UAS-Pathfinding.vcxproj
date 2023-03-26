@@ -146,6 +146,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="RouteFinder.cpp" />
+    <ClCompile Include="UAS.cpp" />
     <ClCompile Include="Waypoint.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +155,7 @@
     <ClInclude Include="RouteRerouter.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="RouteFinder.h" />
+    <ClInclude Include="UAS.h" />
     <ClInclude Include="Waypoint.h" />
     <Content Include="input.json" />
     <Content Include="output.json" />
